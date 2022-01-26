@@ -24,8 +24,7 @@ public class TranquilloApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		cliView.start();
-		//Ombrellone ombrellone = new Ombrellone("prima");
-		//this.ombrelloneService.createOmbrellone(ombrellone);
+
 
 
 

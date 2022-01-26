@@ -19,9 +19,7 @@ public class Ombrellone {
         this.prenotato = false;
     }
 
-    public Ombrellone() {
-
-    }
+    public Ombrellone() { }
 
 
     public Integer getNumeroO() {
