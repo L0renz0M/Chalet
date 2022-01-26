@@ -2,6 +2,7 @@ package it.unicam.ids.tranquillo;
 
 import it.unicam.ids.tranquillo.entities.Ombrellone;
 import it.unicam.ids.tranquillo.services.OmbrelloneService;
+import it.unicam.ids.tranquillo.views.CliView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TranquilloApplication implements CommandLineRunner {
 
 	@Autowired
-	OmbrelloneService ombrelloneService;
+	CliView cliView;
 
 
 
@@ -21,9 +22,10 @@ public class TranquilloApplication implements CommandLineRunner {
 
 	@Override//main.... run con install
 	public void run(String... args) throws Exception {
-		Ombrellone ombrellone = new Ombrellone("prima");
 
-		this.ombrelloneService.createOmbrellone(ombrellone);
+		cliView.start();
+		//Ombrellone ombrellone = new Ombrellone("prima");
+		//this.ombrelloneService.createOmbrellone(ombrellone);
 
 
 

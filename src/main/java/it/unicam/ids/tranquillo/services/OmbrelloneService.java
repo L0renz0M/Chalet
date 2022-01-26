@@ -13,7 +13,9 @@ public class OmbrelloneService {
     public OmbrelloneService (){
 
     }
+
 public void createOmbrellone(Ombrellone ombrellone){
+
         this.ombrelloneRepository.save(ombrellone);
 }
 
