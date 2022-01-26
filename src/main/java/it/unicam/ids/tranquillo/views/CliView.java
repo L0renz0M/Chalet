@@ -25,8 +25,6 @@ public class CliView {
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
-
-
     switch (a){
         case 1:
             /*System.out.println("inserisci fascia desiderata");
@@ -39,10 +37,6 @@ public class CliView {
     }
     }
     while (a!=0);
-
-
-
-
     }
 
 
