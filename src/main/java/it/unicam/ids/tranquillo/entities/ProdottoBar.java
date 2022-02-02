@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class ProdottoBar {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.TABLE)
     private Integer codiceP;
     private String descrizione;
     private double prezzo;

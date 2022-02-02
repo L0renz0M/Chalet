@@ -1,14 +1,13 @@
 package it.unicam.ids.tranquillo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name="cliente")
 public class Cliente {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.TABLE)
     private Integer id;
     private String nome;
     private String cognome;
@@ -39,4 +38,7 @@ public class Cliente {
 
     public void setEmail(String email) { this.email = email; }
 
+
+
+    
 }
