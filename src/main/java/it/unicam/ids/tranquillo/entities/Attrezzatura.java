@@ -6,12 +6,14 @@ import javax.persistence.*;
 
 @Entity
 public class Attrezzatura {
-    @Id @GeneratedValue(strategy=GenerationType.TABLE) private int id;
-
+    @Id@GeneratedValue (strategy=GenerationType.TABLE) private int id;
+    private boolean prenotato;
 
     public Attrezzatura() {}
+
     public Attrezzatura(Tipo_Attrezzatura tipo_attrezzatura) {
         this.tipo_attrezzatura = tipo_attrezzatura;
+        this.prenotato=false;
     }
 
     public int getId() {
@@ -30,15 +32,24 @@ public class Attrezzatura {
         this.tipo_attrezzatura = tipo_attrezzatura;
     }
 
+    public boolean isPrenotato() {
+        return prenotato;
+    }
+
+    public void setPrenotato(boolean prenotato) {
+        this.prenotato = prenotato;
+    }
+
     @ManyToOne
-@JoinColumn(name="id_tipoAttrezzatura")
-private Tipo_Attrezzatura tipo_attrezzatura;
+    @JoinColumn(name="id_tipoAttrezzatura")
+    private Tipo_Attrezzatura tipo_attrezzatura;
 
     @Override
     public String toString() {
-        return "Attrezzatura:"+
+        return "\n"+"Attrezzatura:"+
         "\n" + "id=" + id +
                 "\n"+" tipo_attrezzatura=" + tipo_attrezzatura +
+                "\n"+ "prenotato="+prenotato+
                 '}';
     }
 }

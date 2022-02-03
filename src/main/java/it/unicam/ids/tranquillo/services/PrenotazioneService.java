@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 public class PrenotazioneService {
     @Autowired
     PrenotazioneRepository prenotazioneRepository;
+    @Autowired
+    AttrezzaturaRepository attrezzaturaRepository;
 
 public PrenotazioneService(){
 
@@ -28,4 +30,14 @@ public PrenotazioneService(){
     }
 
 
+    public void createPrenotazioneMod(Attrezzatura attrezzatura) { //da non toccare
+        if (attrezzatura.isPrenotato() == false) {
+            Prenotazione prenotazione = new Prenotazione(attrezzatura);
+            attrezzatura.setPrenotato(true);
+            this.attrezzaturaRepository.save(attrezzatura);
+            this.prenotazioneRepository.save(prenotazione);
+        }
+    }
 }
+
+

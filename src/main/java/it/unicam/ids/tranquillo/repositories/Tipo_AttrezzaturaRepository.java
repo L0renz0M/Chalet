@@ -1,6 +1,6 @@
 package it.unicam.ids.tranquillo.repositories;
 
-import it.unicam.ids.tranquillo.entities.Attrezzatura;
+
 import it.unicam.ids.tranquillo.entities.Tipo_Attrezzatura;
 import org.springframework.data.repository.CrudRepository;
 

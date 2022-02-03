@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 public class Prenotazione {
 
-    @Id @GeneratedValue(strategy=GenerationType.TABLE) private int numeroPrenotazione;
+    @Id @GeneratedValue (strategy=GenerationType.TABLE) private int numeroPrenotazione;
     private Date checkIn;
     private Date checkOut;
 
@@ -53,5 +53,4 @@ public class Prenotazione {
     @JoinColumn()
     private Attrezzatura attrezzatura;
 }
-
 

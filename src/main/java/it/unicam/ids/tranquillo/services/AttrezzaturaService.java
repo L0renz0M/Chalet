@@ -3,13 +3,11 @@ package it.unicam.ids.tranquillo.services;
 import it.unicam.ids.tranquillo.entities.Attrezzatura;
 import it.unicam.ids.tranquillo.entities.Tipo_Attrezzatura;
 import it.unicam.ids.tranquillo.repositories.AttrezzaturaRepository;
-import it.unicam.ids.tranquillo.repositories.PrenotazioneRepository;
 import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -41,7 +39,7 @@ public class AttrezzaturaService {
         this.attrezzaturaRepository.save(attrezzatura);
     }
 
-    public List<Attrezzatura> getAttrezzature() {
+    public List<Attrezzatura> getAttrezzature() { /// da non modificare assolutamente
         List<Attrezzatura> attr = new ArrayList<>();
         this.attrezzaturaRepository.findAll().forEach((a) -> {
             attr.add(a);
@@ -51,6 +49,16 @@ public class AttrezzaturaService {
         }
 
 
+    public List<Attrezzatura> getAttrezzatureMod() {
+        List<Attrezzatura> attr = new ArrayList<>();
+        this.attrezzaturaRepository.findAllByPrenotatoIsFalse().forEach( (a) ->{
+            if(a.isPrenotato()==false){
+                attr.add(a);
+            }
+        }
+           );
+        return attr ;
+    }
 
 
 
