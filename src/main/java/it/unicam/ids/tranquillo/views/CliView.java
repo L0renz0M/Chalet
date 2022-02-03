@@ -1,8 +1,11 @@
 package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Attrezzatura;
+import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.services.AttrezzaturaService;
+import it.unicam.ids.tranquillo.services.OrdinazioneService;
 import it.unicam.ids.tranquillo.services.PrenotazioneService;
+import it.unicam.ids.tranquillo.services.ProdottoBarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +19,10 @@ public class CliView {
     PrenotazioneService prenotazioneService;
     @Autowired
     AttrezzaturaService attrezzaturaService;
-
+    @Autowired
+    OrdinazioneService ordinazioneService;
+    @Autowired
+    ProdottoBarService prodottoBarService;
 
     public void start(){
       int a;
@@ -24,7 +30,7 @@ public class CliView {
     System.out.println("MENU PER PRENOTAZIONE ATTREZZATURA SPIAGGIA"+
             "\n digita:" +
             "\n 1- per prenotare un'attrezzatura " +//prenotare per noi=creazione ombrellone
-            "\n 2- per inserire ombrellone" +
+            "\n 2- per prenotare un prodotto del bar" +
             "\n 3- per prenotare una sdraia" +
             "\n 4- per prenotare un lettino" +
             "\n 0- per uscire dal menu");
@@ -42,30 +48,19 @@ public class CliView {
             System.out.println("Attrezzatura prenotata");
             break;
 
-
         case 2:
-            int b;
-            System.out.println("seleziona il tipo di attrezzatura da aggiungere"+
-                    "\n digita:" +
-                            "\n 1- per inserire OMBRELLONE " +
-                            "\n 2- per inserire SDRAIA" +
-                            "\n 3- per prenotare una sdraia" +
-                            "\n 4- per prenotare un lettino" +
-                            "\n 0- per uscire dal menu");
-            Scanner in= new Scanner(System.in);
-            b = in.nextInt();
-            switch (b){
-                case 1:
-                    try {
-                    this.attrezzaturaService.createAttrezzatura("Ombrellone");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Tipo non presente");
-                    break;
-                }
-                    System.out.println("Ombrellone inserito");
-                    break;
-            }
-
+            List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
+            System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" +listaProdottiBar);
+            System.out.println("inserisci il numero del prodotto da selezionare" +listaProdottiBar.size());
+            Scanner selezioneProd = new Scanner(System.in);
+            int inpProd = selezioneProd.nextInt()-1;
+            ProdottoBar prodottoBar = listaProdottiBar.get(inpProd);
+            System.out.println("inserisci la quantita per il prodotto  selezionato");
+            Scanner qtaProd = new Scanner(System.in);
+            int qta= qtaProd.nextInt();
+            this.ordinazioneService.createOridnazioneProdotti(prodottoBar,qta);
+            System.out.println("prodotto" +prodottoBar+ "prenotato");
+            break;
 
         case 3:
 

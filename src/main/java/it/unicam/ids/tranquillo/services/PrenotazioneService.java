@@ -17,19 +17,6 @@ public class PrenotazioneService {
     @Autowired
     AttrezzaturaRepository attrezzaturaRepository;
 
-public PrenotazioneService(){
-
-    }
-  /* public void createPrenotazione(Prenotazione prenotazione){
-        this.prenotazioneRepository.save(prenotazione);
-    }
-*/
-    public void createPrenotazione(Attrezzatura attrezzatura) { //da non toccare
-        Prenotazione prenotazione = new Prenotazione(attrezzatura);
-        this.prenotazioneRepository.save(prenotazione);
-    }
-
-
     public void createPrenotazioneMod(Attrezzatura attrezzatura) { //da non toccare
         if (attrezzatura.isPrenotato() == false) {
             Prenotazione prenotazione = new Prenotazione(attrezzatura);
@@ -40,4 +27,13 @@ public PrenotazioneService(){
     }
 }
 
+ /* public void createPrenotazione(Prenotazione prenotazione){
+        this.prenotazioneRepository.save(prenotazione);
+    }
+
+    public void createPrenotazione(Attrezzatura attrezzatura) { //da non toccare
+        Prenotazione prenotazione = new Prenotazione(attrezzatura);
+        this.prenotazioneRepository.save(prenotazione);
+    }
+*/
 

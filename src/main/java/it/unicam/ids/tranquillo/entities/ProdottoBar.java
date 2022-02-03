@@ -10,8 +10,7 @@ import javax.persistence.Id;
 public class ProdottoBar {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
-    private Integer codiceP;
+    @GeneratedValue(strategy= GenerationType.TABLE) private Integer codiceP;
     private String descrizione;
     private double prezzo;
     //quantita?
@@ -34,4 +33,14 @@ public class ProdottoBar {
     public double getPrezzo() { return prezzo; }
 
     public void setPrezzo(double prezzo) { this.prezzo = prezzo; }
+
+
+    @Override
+    public String toString() {
+        return  "\n"+"ProdottoBar{" +
+                "\n"+"codiceP=" + codiceP +
+                "\n"+" descrizione='" + descrizione + '\'' +
+                "\n"+" prezzo=" + prezzo +
+                '}';
+    }
 }
