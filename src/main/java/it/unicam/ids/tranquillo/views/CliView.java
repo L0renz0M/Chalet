@@ -38,6 +38,12 @@ public class CliView {
     a = input.nextInt();
     switch (a){
         case 1:
+            System.out.println("proseguire con la prenotazione di un'attrezzatura?");
+            Scanner inputBack= new Scanner(System.in);
+            String back=inputBack.next();
+            if(back.startsWith("i")) {
+                break;
+            }
             List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzatureMod();
             System.out.println("Lista attrezzatura disponibili" + "\n" +listaAttrezzatura);
             System.out.println("inserisci il numero dell'attrezzatura da selezionare"+listaAttrezzatura.size());//controllo personale
@@ -49,18 +55,25 @@ public class CliView {
             break;
 
         case 2:
+            System.out.println("proseguire con la prenotazione di un prodotto del bar?");
+             inputBack= new Scanner(System.in);
+             back=inputBack.next();
+            if(back.startsWith("i")) {
+                break;
+            }
             List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
-            System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" +listaProdottiBar);
-            System.out.println("inserisci il numero del prodotto da selezionare" +listaProdottiBar.size());
+            System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
+            System.out.println("inserisci il numero del prodotto da selezionare" + listaProdottiBar.size());
             Scanner selezioneProd = new Scanner(System.in);
-            int inpProd = selezioneProd.nextInt()-1;
+            int inpProd = selezioneProd.nextInt() - 1;
             ProdottoBar prodottoBar = listaProdottiBar.get(inpProd);
             System.out.println("inserisci la quantita per il prodotto  selezionato");
             Scanner qtaProd = new Scanner(System.in);
-            int qta= qtaProd.nextInt();
-            this.ordinazioneService.createOridnazioneProdotti(prodottoBar,qta);
-            System.out.println("prodotto" +prodottoBar+ "prenotato");
+            int qta = qtaProd.nextInt();
+            this.ordinazioneService.createOridnazioneProdotti(prodottoBar, qta);
+            System.out.println("prodotto" + prodottoBar + "prenotato");
             break;
+
 
         case 3:
 
