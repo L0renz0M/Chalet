@@ -2,10 +2,7 @@ package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Attrezzatura;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
-import it.unicam.ids.tranquillo.services.AttrezzaturaService;
-import it.unicam.ids.tranquillo.services.OrdinazioneService;
-import it.unicam.ids.tranquillo.services.PrenotazioneService;
-import it.unicam.ids.tranquillo.services.ProdottoBarService;
+import it.unicam.ids.tranquillo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +20,39 @@ public class CliView {
     OrdinazioneService ordinazioneService;
     @Autowired
     ProdottoBarService prodottoBarService;
+    @Autowired
+    RegisterUserService logUserService;
+
+    public int login() {
+        int c;
+
+        System.out.println("BENEVENUTO NELLO CHALET 'TRANQUILLO'" +
+                "\n" + "-->PER USUFRUIRE DEI SERVIZI OFFERTI IDENTIFICARSI" +
+                "\n" + "1-->PER IDENTIFICARSI COME CLIENTI " +
+                "\n" + "2-->PER IDENTIFICARSI COME DIPENDENTI");
+        Scanner inpRuolo = new Scanner(System.in);
+        int ruolo = inpRuolo.nextInt();
+
+        if (ruolo == 1) {
+            System.out.println("LOGIN UTENTE");
+            System.out.println("inserisci nome utente:");
+            Scanner emailInp = new Scanner(System.in);
+            String em = emailInp.next();
+            System.out.println("inserisci password:");
+            Scanner passInp = new Scanner(System.in);
+            String pass = passInp.next();
+            this.logUserService.checkCredenziali(em,pass);
+            return 1; // cliente
+        }
+
+
+           return c = 2;//dipendente
+
+    }
+
+
+
+
 
     public void start(){
       int a;
@@ -76,7 +106,7 @@ public class CliView {
 
 
         case 3:
-
+            this.logUserService.createUser("paolo@gmail.com","grosso");
 
         case 4:
     }
@@ -88,6 +118,7 @@ public class CliView {
 
 
 }
+
 //aggiunta attrezzatura da parte del titolare
  /*try {
          this.attrezzaturaService.createAttrezzatura("Ombrellone");

@@ -27,8 +27,12 @@ public class TranquilloApplication implements CommandLineRunner {
 	@Override//main.... run con install
 	public void run(String... args) throws Exception {
 
-		cliView.start();
 
+		cliView.login();
+		/*
+		if(cliView.login() == 1) {
+cliView.start();
+		}*/
 
 
 

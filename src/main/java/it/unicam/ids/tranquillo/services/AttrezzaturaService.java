@@ -38,7 +38,7 @@ public class AttrezzaturaService {
         Attrezzatura attrezzatura = new Attrezzatura(tipo_attrezzatura);
         this.attrezzaturaRepository.save(attrezzatura);
     }
-
+/*
     public List<Attrezzatura> getAttrezzature() { /// da non modificare assolutamente
         List<Attrezzatura> attr = new ArrayList<>();
         this.attrezzaturaRepository.findAll().forEach((a) -> {
@@ -48,7 +48,7 @@ public class AttrezzaturaService {
 
         }
 
-
+*/
     public List<Attrezzatura> getAttrezzatureMod() {
         List<Attrezzatura> attr = new ArrayList<>();
         this.attrezzaturaRepository.findAllByPrenotatoIsFalse().forEach( (a) ->{

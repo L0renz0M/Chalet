@@ -11,13 +11,13 @@ public class Cliente {
     private Integer id;
     private String nome;
     private String cognome;
-    private String email;
 
 
-    public Cliente(String nome, String cognome, String email) {
+
+    public Cliente(String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;
-        this.email = email;
+
     }
 
     public Cliente() {   }
@@ -34,12 +34,12 @@ public class Cliente {
 
     public void setCognome(String cognome) { this.cognome = cognome; }
 
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { this.email = email; }
 
 
 
+@OneToOne
+    @JoinColumn()
+    private RegisterUser registerUser;
 
 
 }

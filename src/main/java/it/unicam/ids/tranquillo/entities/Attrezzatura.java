@@ -1,12 +1,10 @@
 package it.unicam.ids.tranquillo.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
 public class Attrezzatura {
-    @Id@GeneratedValue (strategy=GenerationType.TABLE) private int id;
+    @Id @GeneratedValue (strategy=GenerationType.TABLE) private int id;
     private boolean prenotato;
 
     public Attrezzatura() {}
