@@ -23,46 +23,16 @@ public class CliView {
     @Autowired
     RegisterUserService logUserService;
 
-    public int login() {
-        int c;
-
-        System.out.println("BENEVENUTO NELLO CHALET 'TRANQUILLO'" +
-                "\n" + "-->PER USUFRUIRE DEI SERVIZI OFFERTI IDENTIFICARSI" +
-                "\n" + "1-->PER IDENTIFICARSI COME CLIENTI " +
-                "\n" + "2-->PER IDENTIFICARSI COME DIPENDENTI");
-        Scanner inpRuolo = new Scanner(System.in);
-        int ruolo = inpRuolo.nextInt();
-
-        if (ruolo == 1) {
-            System.out.println("LOGIN UTENTE");
-            System.out.println("inserisci nome utente:");
-            Scanner emailInp = new Scanner(System.in);
-            String em = emailInp.next();
-            System.out.println("inserisci password:");
-            Scanner passInp = new Scanner(System.in);
-            String pass = passInp.next();
-            this.logUserService.checkCredenziali(em,pass);
-            return 1; // cliente
-        }
-
-
-           return c = 2;//dipendente
-
-    }
-
-
-
-
 
     public void start(){
       int a;
     do{
-    System.out.println("MENU PER PRENOTAZIONE ATTREZZATURA SPIAGGIA"+
+    System.out.println("\n"+"MENU PER PRENOTAZIONE ATTREZZATURA SPIAGGIA"+
             "\n digita:" +
             "\n 1- per prenotare un'attrezzatura " +//prenotare per noi=creazione ombrellone
             "\n 2- per prenotare un prodotto del bar" +
-            "\n 3- per prenotare una sdraia" +
-            "\n 4- per prenotare un lettino" +
+            "\n 3- per prenotare un'attivita sportiva" +
+            "\n 4- per ricapitolare le prorpie prenotazioni" +
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
@@ -88,7 +58,7 @@ public class CliView {
             System.out.println("proseguire con la prenotazione di un prodotto del bar?");
              inputBack= new Scanner(System.in);
              back=inputBack.next();
-            if(back.startsWith("i")) {
+            if(back.startsWith("no")) {
                 break;
             }
             List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
@@ -106,14 +76,13 @@ public class CliView {
 
 
         case 3:
-            this.logUserService.createUser("paolo@gmail.com","grosso");
+
 
         case 4:
     }
     }
     while (a!=0);
     }
-
 
 
 
