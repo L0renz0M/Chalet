@@ -11,13 +11,13 @@ public class Cliente {
     private Integer id;
     private String nome;
     private String cognome;
+    private String email;
 
 
-
-    public Cliente(String nome, String cognome) {
+    public Cliente(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
-
+        this.email=email;
     }
 
     public Cliente() {   }

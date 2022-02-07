@@ -1,5 +1,7 @@
 package it.unicam.ids.tranquillo.views;
 
+import it.unicam.ids.tranquillo.entities.Cliente;
+import it.unicam.ids.tranquillo.repositories.ClienteRepository;
 import it.unicam.ids.tranquillo.repositories.RegisterUserRepository;
 import it.unicam.ids.tranquillo.services.RegisterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class UserView {
     RegisterUserService logUserService;
     @Autowired
     RegisterUserRepository registerUserRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
 
     public int login() {
         int c;
@@ -50,7 +54,7 @@ public class UserView {
 
     public void registrazione() {
         int a = 0;
-        System.out.println("BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
+        System.out.println("\n" +"BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
                 "DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI:" );
 
         do {
@@ -63,10 +67,23 @@ public class UserView {
                 a = 1;
 
             } else{
-                System.out.println("INSERISCI UNA PASSSWORD PER LA REGISTRAZIONE: ");
+                System.out.println("\n"+"INSERISCI UNA PASSSWORD PER LA REGISTRAZIONE: ");
                 Scanner passInp = new Scanner(System.in);
                 String pass = passInp.next();
                 this.logUserService.createUser(email, pass);
+                System.out.println("\n"+"INSERISCI I TUOI DATI: ");
+                System.out.println("\n"+"INSERISCI NOME: ");
+                Scanner nomeInp = new Scanner(System.in);
+                String nome= nomeInp.next();
+                System.out.println("\n"+"INSERISCI COGNOME: ");
+                Scanner cognomeInp = new Scanner(System.in);
+                String cognome= cognomeInp.next();
+
+                Cliente cliente = new Cliente(nome,cognome,email);
+                this.clienteRepository.save(cliente);
+
+
+
                 a=0;
                     }
         } while (a != 0);

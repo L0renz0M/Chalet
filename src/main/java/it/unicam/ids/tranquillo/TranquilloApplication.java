@@ -3,7 +3,6 @@ package it.unicam.ids.tranquillo;
 
 
 import it.unicam.ids.tranquillo.views.CliView;
-import it.unicam.ids.tranquillo.views.DipendentiView;
 import it.unicam.ids.tranquillo.views.UserView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
