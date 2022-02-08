@@ -48,12 +48,12 @@ public class Ordinazione {
         this.completato = completato;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="codice_prodotto")
     private ProdottoBar prodottoBar;
 
-    @ManyToOne
-    @JoinColumn(name="iD_Cliente")
+    @OneToOne
+    @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
 }

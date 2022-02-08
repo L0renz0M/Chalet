@@ -40,6 +40,7 @@ public class RegisterUser {
     }
 
     @OneToOne
-    @JoinColumn()
+    @JoinColumn(name="id_cliente", referencedColumnName = "id")
+
     private Cliente cliente;
 }

@@ -21,6 +21,7 @@ public class Prenotazione {
         this.checkIn = new Date();
         this.checkOut = new Date();
         this.attrezzatura = attrezzatura;
+
     }
 
 
@@ -48,9 +49,28 @@ public class Prenotazione {
         this.checkOut = checkOut;
     }
 
+    public Attrezzatura getAttrezzatura() {
+        return attrezzatura;
+    }
+
+    public void setAttrezzatura(Attrezzatura attrezzatura) {
+        this.attrezzatura = attrezzatura;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     @ManyToOne
     @JoinColumn()
     private Attrezzatura attrezzatura;
+
+    @ManyToOne
+    @JoinColumn()
+    private Cliente cliente;
 }
 

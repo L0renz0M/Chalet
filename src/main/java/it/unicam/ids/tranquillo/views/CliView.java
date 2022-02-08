@@ -1,5 +1,6 @@
 package it.unicam.ids.tranquillo.views;
 
+import it.unicam.ids.tranquillo.entities.AttivitaSportiva;
 import it.unicam.ids.tranquillo.entities.Attrezzatura;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.services.*;
@@ -22,7 +23,10 @@ public class CliView {
     ProdottoBarService prodottoBarService;
     @Autowired
     RegisterUserService logUserService;
-
+    @Autowired
+    RiservazioneAttivitaService riservazioneAttivitaService;
+    @Autowired
+    AttivitaSportivaService attivitaSportivaService;
 
     public void start(){
       int a;
@@ -63,6 +67,7 @@ public class CliView {
             }
             List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
             System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
+
             System.out.println("inserisci il numero del prodotto da selezionare" + listaProdottiBar.size());
             Scanner selezioneProd = new Scanner(System.in);
             int inpProd = selezioneProd.nextInt() - 1;
@@ -76,7 +81,12 @@ public class CliView {
 
 
         case 3:
-
+            listaAttrezzatura = this.attrezzaturaService.getAttrezzatureMod();
+            listaProdottiBar = this.prodottoBarService.getProdottiBar();
+            List<AttivitaSportiva>listaAttivita= this.attivitaSportivaService.getAttivitaSportiva();
+            System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
+            System.out.println("Lista attrezzatura disponibili" + "\n" +listaAttrezzatura);
+            System.out.println("Lista aattivita disponibili" + "\n" +listaAttrezzatura);
 
         case 4:
     }

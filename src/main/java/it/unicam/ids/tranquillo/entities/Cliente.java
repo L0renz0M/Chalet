@@ -1,17 +1,16 @@
 package it.unicam.ids.tranquillo.entities;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table(name="cliente")
 public class Cliente {
-    @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
-    private Integer id;
+    @Id @GeneratedValue(strategy= GenerationType.TABLE) private Integer id;
     private String nome;
     private String cognome;
     private String email;
+
 
 
     public Cliente(String nome, String cognome, String email) {
@@ -34,12 +33,14 @@ public class Cliente {
 
     public void setCognome(String cognome) { this.cognome = cognome; }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-
-@OneToOne
-    @JoinColumn()
-    private RegisterUser registerUser;
 
 
 }

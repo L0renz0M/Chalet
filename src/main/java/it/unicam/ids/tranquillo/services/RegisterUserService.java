@@ -19,11 +19,10 @@ public class RegisterUserService {
         this.logUserRepository.save(user);
     }
 
-    public void checkCredenziali(String em, String pass) {
+    public boolean checkCredenziali(String em, String pass) {
 
-        if (this.logUserRepository.existsByEmail(em) && this.logUserRepository.existsByPassword(pass))
-
-
+        if (this.logUserRepository.existsByEmailAndAndPassword(em,pass))
             System.out.print("LOGIN AVVENUTO CON SUCCESSO");
+        return true;
     }
 }

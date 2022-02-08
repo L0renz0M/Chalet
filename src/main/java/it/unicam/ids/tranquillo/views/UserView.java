@@ -37,7 +37,7 @@ public class UserView {
             System.out.println("inserisci password:");
             Scanner passInp = new Scanner(System.in);
             String pass = passInp.next();
-            this.logUserService.checkCredenziali(em, pass);
+            if(this.logUserService.checkCredenziali(em, pass)==true);
             return 1; // cliente
         }
         System.out.println("LOGIN DIPENDENTE");
@@ -63,10 +63,12 @@ public class UserView {
             String email = emInp.next();
 
             if (this.registerUserRepository.existsByEmail(email) == true) {
-                System.out.println("\n"+"---EMAIL INSERITA GIA' PRESENTE PROVARE CON UNA DIFFERENTE--- ");
+                System.out.println("\n"+"---EMAIL INSERITA GIA' PRESENTE PROVARE CON UNA DIFFERENTE");
+                Scanner in = new Scanner(System.in);
                 a = 1;
 
             } else{
+
                 System.out.println("\n"+"INSERISCI UNA PASSSWORD PER LA REGISTRAZIONE: ");
                 Scanner passInp = new Scanner(System.in);
                 String pass = passInp.next();
@@ -82,12 +84,25 @@ public class UserView {
                 Cliente cliente = new Cliente(nome,cognome,email);
                 this.clienteRepository.save(cliente);
 
-
-
                 a=0;
                     }
         } while (a != 0);
 
+    }
+
+
+    public void benevenuto (){
+        System.out.println("\n" +"BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
+                "DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI O ACCEDERVI SE SI E' GIA REGISTRATI:" );
+        System.out.println("SCEGLIERE :"+
+                "\n"+ "1- PER EFFETTUARE IL LOGIN"+
+                "\n"+"2- PER EFFETTUARE LA REGISTRAZIONE");
+        Scanner inp= new Scanner(System.in);
+        int a = inp.nextInt();
+        switch (a){
+            case 1: login();break;
+            case 2: registrazione();break;
+        }
     }
 
 }

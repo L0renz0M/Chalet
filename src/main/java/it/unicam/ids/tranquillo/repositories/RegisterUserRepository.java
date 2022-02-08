@@ -9,9 +9,9 @@ public interface RegisterUserRepository extends CrudRepository<RegisterUser, Int
 
 
 
+    boolean existsByEmailAndAndPassword(String email,String password);
+
     boolean existsByEmail(String email);
-
-
 
     boolean existsByPassword(String password);
 }
