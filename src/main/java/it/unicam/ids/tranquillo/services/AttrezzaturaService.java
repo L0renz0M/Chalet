@@ -49,15 +49,8 @@ public class AttrezzaturaService {
         }
 
 */
-    public List<Attrezzatura> getAttrezzatureMod() {
-        List<Attrezzatura> attr = new ArrayList<>();
-        this.attrezzaturaRepository.findAllByPrenotatoIsFalse().forEach( (a) ->{
-            if(a.isPrenotato()==false){
-                attr.add(a);
-            }
-        }
-           );
-        return attr ;
+    public List<Attrezzatura> getAttrezzaturaNonPrenotaate() {
+        return this.attrezzaturaRepository.findAllByPrenotatoIsFalse() ;
     }
 
 

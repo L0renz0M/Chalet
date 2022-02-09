@@ -41,18 +41,24 @@ public class TranquilloApplication implements CommandLineRunner {
 		int a = inp.nextInt();
 		switch (a) {
 			case 1:
-				
+
 				if (userView.login() == 1) {
 					cliView.start();
 				} else {
-					dipendentiView.start();}
-					break;
+					dipendentiView.start();
+				}
+				break;
 
 			case 2:
-				userView.registrazione();
-				break;
+				if (userView.registrazione() == true) {
+					if (userView.login() == 1) {
+						cliView.start();
+					} else {
+						dipendentiView.start();
+					}
+					break;
 				}
-
+		}
 
 		}
 

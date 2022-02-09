@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 public class RegisterUserService {
 
     @Autowired
-    RegisterUserRepository logUserRepository;
+    RegisterUserRepository registerUserRepository;
 
 
     public void createUser(String email,String password) {
         RegisterUser user = new RegisterUser(email,password);
-        this.logUserRepository.save(user);
+        this.registerUserRepository.save(user);
     }
 
     public boolean checkCredenziali(String em, String pass) {
 
-        if (this.logUserRepository.existsByEmailAndAndPassword(em,pass))
+        if (this.registerUserRepository.existsByEmailAndAndPassword(em,pass))
             System.out.print("LOGIN AVVENUTO CON SUCCESSO");
         return true;
     }

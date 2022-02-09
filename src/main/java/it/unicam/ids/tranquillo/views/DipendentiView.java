@@ -66,7 +66,7 @@ public class DipendentiView {
                     "\n digita: " +
                     "\n 1- per inserire un'attrezzatura per la spiaggia " +
                     "\n 2-  per creare una nuova ATTIVITA' SPORTIVA" +
-                    "\n 3- per lista attivita disponibili" +
+                    "\n 3- " +
                     "\n 4- " +
                     "\n 0- per uscire dal menu");
             Scanner in = new Scanner(System.in);

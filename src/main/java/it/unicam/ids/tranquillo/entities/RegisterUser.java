@@ -9,19 +9,34 @@ import javax.persistence.*;
 public class RegisterUser {
 
    @Id @GeneratedValue(strategy=GenerationType.TABLE) private int id;
-    private String email;;
+    private String email;
     private String password;
 
 
     public RegisterUser(String email,String password) {
-        this.email = email;
-        this.password = password;
+       this.email = email;
+       this.password = password;
+
     }
 
     public RegisterUser() {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public String getEmail() {
         return email;
@@ -40,7 +55,7 @@ public class RegisterUser {
     }
 
     @OneToOne
-    @JoinColumn(name="id_cliente", referencedColumnName = "id")
-
+    @JoinColumn(name="id_cliente")
     private Cliente cliente;
+
 }

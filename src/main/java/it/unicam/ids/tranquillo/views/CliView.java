@@ -48,7 +48,7 @@ public class CliView {
             if(back.startsWith("i")) {
                 break;
             }
-            List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzatureMod();
+            List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
             System.out.println("Lista attrezzatura disponibili" + "\n" +listaAttrezzatura);
             System.out.println("inserisci il numero dell'attrezzatura da selezionare"+listaAttrezzatura.size());//controllo personale
             Scanner selezioneNumero = new Scanner(System.in);
@@ -81,7 +81,7 @@ public class CliView {
 
 
         case 3:
-            listaAttrezzatura = this.attrezzaturaService.getAttrezzatureMod();
+            listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
             listaProdottiBar = this.prodottoBarService.getProdottiBar();
             List<AttivitaSportiva>listaAttivita= this.attivitaSportivaService.getAttivitaSportiva();
             System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);

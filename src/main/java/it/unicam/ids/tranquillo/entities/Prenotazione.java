@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
+@Table(name="prenotazione")
 public class Prenotazione {
 
     @Id @GeneratedValue (strategy=GenerationType.TABLE) private int numeroPrenotazione;
@@ -57,6 +59,7 @@ public class Prenotazione {
         this.attrezzatura = attrezzatura;
     }
 
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -69,8 +72,10 @@ public class Prenotazione {
     @JoinColumn()
     private Attrezzatura attrezzatura;
 
-    @ManyToOne
-    @JoinColumn()
+    @ManyToOne()
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-}
+    }
+
+
 

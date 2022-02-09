@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class UserView {
 
     @Autowired
-    RegisterUserService logUserService;
+    RegisterUserService registerUserService;
     @Autowired
     RegisterUserRepository registerUserRepository;
     @Autowired
@@ -37,7 +37,7 @@ public class UserView {
             System.out.println("inserisci password:");
             Scanner passInp = new Scanner(System.in);
             String pass = passInp.next();
-            if(this.logUserService.checkCredenziali(em, pass)==true);
+            if(this.registerUserService.checkCredenziali(em, pass)==true);
             return 1; // cliente
         }
         System.out.println("LOGIN DIPENDENTE");
@@ -47,12 +47,12 @@ public class UserView {
         System.out.println("inserisci password:");
         Scanner passInp = new Scanner(System.in);
         String pass = passInp.next();
-        this.logUserService.checkCredenziali(em, pass);
+        this.registerUserService.checkCredenziali(em, pass);
         return c = 2;//dipendente
 
     }
 
-    public void registrazione() {
+    public boolean registrazione() {
         int a = 0;
         System.out.println("\n" +"BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
                 "DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI:" );
@@ -72,7 +72,7 @@ public class UserView {
                 System.out.println("\n"+"INSERISCI UNA PASSSWORD PER LA REGISTRAZIONE: ");
                 Scanner passInp = new Scanner(System.in);
                 String pass = passInp.next();
-                this.logUserService.createUser(email, pass);
+                this.registerUserService.createUser(email, pass);
                 System.out.println("\n"+"INSERISCI I TUOI DATI: ");
                 System.out.println("\n"+"INSERISCI NOME: ");
                 Scanner nomeInp = new Scanner(System.in);
@@ -85,24 +85,13 @@ public class UserView {
                 this.clienteRepository.save(cliente);
 
                 a=0;
+
                     }
         } while (a != 0);
-
+        return true;
     }
 
 
-    public void benevenuto (){
-        System.out.println("\n" +"BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
-                "DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI O ACCEDERVI SE SI E' GIA REGISTRATI:" );
-        System.out.println("SCEGLIERE :"+
-                "\n"+ "1- PER EFFETTUARE IL LOGIN"+
-                "\n"+"2- PER EFFETTUARE LA REGISTRAZIONE");
-        Scanner inp= new Scanner(System.in);
-        int a = inp.nextInt();
-        switch (a){
-            case 1: login();break;
-            case 2: registrazione();break;
-        }
-    }
+
 
 }

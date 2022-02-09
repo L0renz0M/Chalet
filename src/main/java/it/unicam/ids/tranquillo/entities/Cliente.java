@@ -3,8 +3,8 @@ package it.unicam.ids.tranquillo.entities;
 import javax.persistence.*;
 
 
+
 @Entity
-@Table(name="cliente")
 public class Cliente {
     @Id @GeneratedValue(strategy= GenerationType.TABLE) private Integer id;
     private String nome;
@@ -12,8 +12,7 @@ public class Cliente {
     private String email;
 
 
-
-    public Cliente(String nome, String cognome, String email) {
+    public Cliente(String nome, String cognome,String email) {
         this.nome = nome;
         this.cognome = cognome;
         this.email=email;
@@ -41,6 +40,11 @@ public class Cliente {
         this.email = email;
     }
 
+
+
+    @OneToOne
+    @JoinColumn
+    private Prenotazione prenotazione;
 
 
 }
