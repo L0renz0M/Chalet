@@ -11,7 +11,7 @@ public class RegisterUser {
    @Id @GeneratedValue(strategy=GenerationType.TABLE) private int id;
     private String email;
     private String password;
-    private String ruolo;
+
 
 
     public RegisterUser(String email,String password,Cliente cliente) {
@@ -22,6 +22,8 @@ public class RegisterUser {
 
     public RegisterUser() {
     }
+
+
 
     public int getId() {
         return id;

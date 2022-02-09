@@ -40,34 +40,32 @@ public class CliView {
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
+    String back;
     switch (a){
         case 1:
-            System.out.println("proseguire con la prenotazione di un'attrezzatura?");
-            Scanner inputBack= new Scanner(System.in);
-            String back=inputBack.next();
-            if(back.startsWith("i")) {
-                break;
-            }
-            List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
-            System.out.println("Lista attrezzatura disponibili" + "\n" +listaAttrezzatura);
-            System.out.println("inserisci il numero dell'attrezzatura da selezionare"+listaAttrezzatura.size());//controllo personale
-            Scanner selezioneNumero = new Scanner(System.in);
-            int inpNum = selezioneNumero.nextInt()-1;
-            Attrezzatura attrezzatura = listaAttrezzatura.get(inpNum);
-            this.prenotazioneService.createPrenotazione(attrezzatura);
-            System.out.println("Attrezzatura prenotata");
-            break;
+           do {
+               List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
+               System.out.println("Lista attrezzatura disponibili" + "\n" + listaAttrezzatura);
+               if (listaAttrezzatura.size() <= 0) {
+                   System.out.println("Lista attrezzatura vuota");
+                   break;
+               }
+               System.out.println("inserisci il numero dell'attrezzatura da selezionare" + listaAttrezzatura.size());//controllo personale
+               Scanner selezioneNumero = new Scanner(System.in);
+               int inpNum = selezioneNumero.nextInt() - 1;
+               Attrezzatura attrezzatura = listaAttrezzatura.get(inpNum);
+               this.prenotazioneService.createPrenotazione(attrezzatura);
+               System.out.println("Attrezzatura prenotata");
+               System.out.println("proseguire con la prenotazione di un'attrezzatura?");
+               Scanner inputBack = new Scanner(System.in);
+               back = inputBack.next();
 
+           }while(!back.startsWith("no"));
+            break;
         case 2:
-            System.out.println("proseguire con la prenotazione di un prodotto del bar?");
-             inputBack= new Scanner(System.in);
-             back=inputBack.next();
-            if(back.startsWith("no")) {
-                break;
-            }
+           do{
             List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
             System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
-
             System.out.println("inserisci il numero del prodotto da selezionare" + listaProdottiBar.size());
             Scanner selezioneProd = new Scanner(System.in);
             int inpProd = selezioneProd.nextInt() - 1;
@@ -76,18 +74,35 @@ public class CliView {
             Scanner qtaProd = new Scanner(System.in);
             int qta = qtaProd.nextInt();
             this.ordinazioneService.createOridnazioneProdotti(prodottoBar, qta);
-            System.out.println("prodotto" + prodottoBar + "prenotato");
+            System.out.println("\n"+"prodotto" + prodottoBar + "prenotato");
+            System.out.println("proseguire con la prenotazione di un prodotto del bar?");
+            Scanner inputBack= new Scanner(System.in);
+            back = inputBack.next();
+        }while(!back.startsWith("no"));
             break;
 
-
         case 3:
-            listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
-            listaProdottiBar = this.prodottoBarService.getProdottiBar();
-            List<AttivitaSportiva>listaAttivita= this.attivitaSportivaService.getAttivitaSportiva();
-            System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
-            System.out.println("Lista attrezzatura disponibili" + "\n" +listaAttrezzatura);
-            System.out.println("Lista aattivita disponibili" + "\n" +listaAttrezzatura);
-
+            do{
+                List<AttivitaSportiva> listaAttivitaSportiva = this.attivitaSportivaService.getAttivitaSportiva();
+                System.out.println("Lista attivita sportive disponibili" + "\n" + listaAttivitaSportiva);
+                if (listaAttivitaSportiva.size() <= 0) {
+                    System.out.println("Lista attività vuota");
+                    break;
+                }
+                System.out.println("inserisci il numero dell'attivitao da selezionare" + listaAttivitaSportiva.size());
+                Scanner selezioneAtt = new Scanner(System.in);
+                int inpAtt = selezioneAtt.nextInt() - 1;
+                AttivitaSportiva attivitaSportiva = listaAttivitaSportiva.get(inpAtt);
+                System.out.println("inserisci il numero di posti da riservare per l'attivita");
+                Scanner qtaPosti = new Scanner(System.in);
+                int qta = qtaPosti.nextInt();
+                this.riservazioneAttivitaService.createRiservazioneAttivita(attivitaSportiva, qta);
+                System.out.println("\n"+"attivita" + attivitaSportiva + "prenotata");
+                System.out.println("proseguire con la prenotazione di un'altra attivita?");
+                Scanner inputBack= new Scanner(System.in);
+                back = inputBack.next();
+            }while(!back.startsWith("no"));
+            break;
         case 4:
     }
     }

@@ -48,12 +48,34 @@ public class Ordinazione {
         this.completato = completato;
     }
 
-    @OneToOne
-    @JoinColumn(name="codice_prodotto")
+    public int getQuantita() {
+        return quantita;
+    }
+
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
+    }
+
+    public ProdottoBar getProdottoBar() {
+        return prodottoBar;
+    }
+
+    public void setProdottoBar(ProdottoBar prodottoBar) {
+        this.prodottoBar = prodottoBar;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    @ManyToOne
     private ProdottoBar prodottoBar;
 
-    @OneToOne
-    @JoinColumn(name="id_cliente")
+    @ManyToOne
     private Cliente cliente;
 
 }

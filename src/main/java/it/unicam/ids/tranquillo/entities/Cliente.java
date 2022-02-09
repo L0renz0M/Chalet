@@ -1,7 +1,7 @@
 package it.unicam.ids.tranquillo.entities;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 
 @Entity
@@ -43,8 +43,9 @@ public class Cliente {
 
 
     @OneToOne
-    @JoinColumn
     private Prenotazione prenotazione;
 
+    @OneToOne
+    private Ordinazione ordinazione;
 
 }

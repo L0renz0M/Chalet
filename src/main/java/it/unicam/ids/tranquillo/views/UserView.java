@@ -39,13 +39,13 @@ public class UserView {
                 System.out.println("inserisci password:");
                 Scanner passInp = new Scanner(System.in);
                 String pass = passInp.next();
-                if (this.registerUserService.checkCredenziali(em, pass) == true){
-                    System.out.println("loggato con successo");
+                if(this.registerUserService.checkCredenziali(em, pass) == true){
                     RegisterUser user = this.registerUserService.getUserByEmail(em);
                     SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
                     sessione.setCliente(user.getCliente());
                     return 1;
-                } else{
+                }
+                else{
                     System.out.println("LOGIN ERRATO");
                     continue;
                 }
@@ -72,7 +72,7 @@ public class UserView {
             Scanner emInp = new Scanner(System.in);
             String email = emInp.next();
 
-            if (this.registerUserRepository.existsByEmail(email) == true) {
+            if (this.registerUserRepository.existsByEmail(email)) {
                 System.out.println("\n"+"---EMAIL INSERITA GIA' PRESENTE PROVARE CON UNA DIFFERENTE");
                 Scanner in = new Scanner(System.in);
                 a = 1;
@@ -89,11 +89,9 @@ public class UserView {
                 System.out.println("\n"+"INSERISCI COGNOME: ");
                 Scanner cognomeInp = new Scanner(System.in);
                 String cognome= cognomeInp.next();
-
                 Cliente cliente = new Cliente(nome,cognome,email);
-                Cliente clienteInserito = this.clienteRepository.save(cliente);
-
-                this.registerUserService.createUser(email, pass, clienteInserito);
+                this.clienteRepository.save(cliente);
+                this.registerUserService.createUser(email, pass, cliente);
 
                 a=0;
 

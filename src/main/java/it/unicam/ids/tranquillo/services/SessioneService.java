@@ -5,7 +5,8 @@ import it.unicam.ids.tranquillo.entities.Cliente;
 public class SessioneService {
 
     private static SessioneService instance;
-    private Cliente cliente;
+    private Cliente cliente; //sostituire con generic user con cui poi attraverso il ruolo definisco la view
+
 
     public static SessioneService getInstance() {
         if (SessioneService.instance == null) {

@@ -25,11 +25,12 @@ public class RegisterUserService {
         if (users.size()==0){
             return false;
         }
+        else{
         RegisterUser user = users.get(0);
-        if(user.getPassword()==pass) {
+        if(user.getPassword().equals(pass)) {
             System.out.print("LOGIN AVVENUTO CON SUCCESSO");
             return true;
-        }
+        }}
     return false;
     }
 

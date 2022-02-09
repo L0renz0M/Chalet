@@ -3,7 +3,7 @@ package it.unicam.ids.tranquillo.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
 public class AttivitaSportiva {
@@ -56,7 +56,6 @@ public class AttivitaSportiva {
     }
 
 
-
     public String getDataOraAttiva() {
         return dataOraAttiva;
     }
@@ -65,5 +64,13 @@ public class AttivitaSportiva {
         this.dataOraAttiva = dataOraAttiva;
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "\n"+ "codiceAttivita=" + codiceAttivita +
+                 "\n"+ ", nomeAttvita='" + nomeAttvita +
+                 "\n"+", numeroPosti=" + numeroPosti +
+                 "\n"+ ", descrizione='" + descrizione +
+                "\n"+", dataOraAttiva='" + dataOraAttiva ;
+    }
 }

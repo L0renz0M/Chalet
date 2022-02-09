@@ -16,8 +16,9 @@ public class OrdinazioneService {
 
     public void createOridnazioneProdotti(ProdottoBar prodottoBar, int quantita) { //da non toccare
             Ordinazione ordinazione = new Ordinazione(prodottoBar,quantita);
+            SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
+            ordinazione.setCliente(sessione.getCliente());
             this.ordinazioneRepository.save(ordinazione);
-
     }
 
 

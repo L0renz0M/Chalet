@@ -16,5 +16,6 @@ public interface RegisterUserRepository extends CrudRepository<RegisterUser, Int
     List<RegisterUser> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
     boolean findByPassword(String password);
 }

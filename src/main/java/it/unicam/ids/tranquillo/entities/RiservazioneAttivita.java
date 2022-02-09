@@ -49,12 +49,10 @@ public class RiservazioneAttivita {
         this.attivitaSportiva = attivitaSportiva;
     }
 
-    @OneToOne
-    @JoinColumn(name="iD_Cliente")
+    @ManyToOne
     private Cliente cliente;
 
-    @OneToOne
-    @JoinColumn(name="attivita")
+    @ManyToOne
     private AttivitaSportiva attivitaSportiva;
 
 }
