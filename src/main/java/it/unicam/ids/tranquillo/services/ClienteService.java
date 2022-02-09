@@ -10,14 +10,9 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-     public ClienteService (){
-
-     }
 
     public void createCliente(Cliente cliente){
-
          this.clienteRepository.save(cliente);
-
     }
 
 

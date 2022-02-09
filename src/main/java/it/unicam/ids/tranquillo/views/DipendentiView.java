@@ -22,7 +22,7 @@ public class DipendentiView {
         do {
             System.out.println("seleziona azione da svolgere come dipendete" +
                     "\n digita: " +
-                    "\n 1- per inserire un'attrezzatura per la spiaggia " +
+                    "\n 1- per inserire un OMBRELLONE  " +
                     "\n 2- per inserire una SDRAIA" +
                     "\n 3- per creare una nuova ATTIVITA' SPORTIVA " +
                     "\n 4- per inserire un LETTINO" +

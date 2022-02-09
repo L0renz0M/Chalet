@@ -18,10 +18,12 @@ public class PrenotazioneService {
     @Autowired
     AttrezzaturaRepository attrezzaturaRepository;
 
-    public void createPrenotazioneMod(Attrezzatura attrezzatura) {
+    public void createPrenotazione(Attrezzatura attrezzatura) {
         if (attrezzatura.isPrenotato() == false) {
             Prenotazione prenotazione = new Prenotazione(attrezzatura);
             attrezzatura.setPrenotato(true);
+            SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
+            prenotazione.setCliente(sessione.getCliente());
             this.attrezzaturaRepository.save(attrezzatura);
             this.prenotazioneRepository.save(prenotazione);
         }

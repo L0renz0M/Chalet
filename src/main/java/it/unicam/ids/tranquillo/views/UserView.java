@@ -1,9 +1,11 @@
 package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Cliente;
+import it.unicam.ids.tranquillo.entities.RegisterUser;
 import it.unicam.ids.tranquillo.repositories.ClienteRepository;
 import it.unicam.ids.tranquillo.repositories.RegisterUserRepository;
 import it.unicam.ids.tranquillo.services.RegisterUserService;
+import it.unicam.ids.tranquillo.services.SessioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,37 +23,45 @@ public class UserView {
 
     public int login() {
         int c;
+        while (true) {
+            System.out.println("\n" + "BENEVENUTO NELLO CHALET 'TRANQUILLO'" +
+                    "\n" + "-->PER USUFRUIRE DEI SERVIZI OFFERTI IDENTIFICARSI" +
+                    "\n\n" + "1-->PER IDENTIFICARSI COME CLIENTI " +
+                    "\n" + "2-->PER IDENTIFICARSI COME DIPENDENTI");
+            Scanner inpRuolo = new Scanner(System.in);
+            int ruolo = inpRuolo.nextInt();
 
-        System.out.println("\n" + "BENEVENUTO NELLO CHALET 'TRANQUILLO'" +
-                "\n" + "-->PER USUFRUIRE DEI SERVIZI OFFERTI IDENTIFICARSI" +
-                "\n\n" + "1-->PER IDENTIFICARSI COME CLIENTI " +
-                "\n"   + "2-->PER IDENTIFICARSI COME DIPENDENTI");
-        Scanner inpRuolo = new Scanner(System.in);
-        int ruolo = inpRuolo.nextInt();
-
-        if (ruolo == 1) {
-            System.out.println("LOGIN UTENTE");
+            if (ruolo == 1) {
+                System.out.println("LOGIN UTENTE");
+                System.out.println("inserisci email:");
+                Scanner emailInp = new Scanner(System.in);
+                String em = emailInp.next();
+                System.out.println("inserisci password:");
+                Scanner passInp = new Scanner(System.in);
+                String pass = passInp.next();
+                if (this.registerUserService.checkCredenziali(em, pass) == true){
+                    System.out.println("loggato con successo");
+                    RegisterUser user = this.registerUserService.getUserByEmail(em);
+                    SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
+                    sessione.setCliente(user.getCliente());
+                    return 1;
+                } else{
+                    System.out.println("LOGIN ERRATO");
+                    continue;
+                }
+            }
+            System.out.println("LOGIN DIPENDENTE");
             System.out.println("inserisci email:");
             Scanner emailInp = new Scanner(System.in);
             String em = emailInp.next();
             System.out.println("inserisci password:");
             Scanner passInp = new Scanner(System.in);
             String pass = passInp.next();
-            if(this.registerUserService.checkCredenziali(em, pass)==true);
-            return 1; // cliente
+            this.registerUserService.checkCredenziali(em, pass);
+            return c = 2;//dipendente
+
         }
-        System.out.println("LOGIN DIPENDENTE");
-        System.out.println("inserisci email:");
-        Scanner emailInp = new Scanner(System.in);
-        String em = emailInp.next();
-        System.out.println("inserisci password:");
-        Scanner passInp = new Scanner(System.in);
-        String pass = passInp.next();
-        this.registerUserService.checkCredenziali(em, pass);
-        return c = 2;//dipendente
-
     }
-
     public boolean registrazione() {
         int a = 0;
         System.out.println("\n" +"BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
@@ -72,7 +82,6 @@ public class UserView {
                 System.out.println("\n"+"INSERISCI UNA PASSSWORD PER LA REGISTRAZIONE: ");
                 Scanner passInp = new Scanner(System.in);
                 String pass = passInp.next();
-                this.registerUserService.createUser(email, pass);
                 System.out.println("\n"+"INSERISCI I TUOI DATI: ");
                 System.out.println("\n"+"INSERISCI NOME: ");
                 Scanner nomeInp = new Scanner(System.in);
@@ -82,11 +91,13 @@ public class UserView {
                 String cognome= cognomeInp.next();
 
                 Cliente cliente = new Cliente(nome,cognome,email);
-                this.clienteRepository.save(cliente);
+                Cliente clienteInserito = this.clienteRepository.save(cliente);
+
+                this.registerUserService.createUser(email, pass, clienteInserito);
 
                 a=0;
 
-                    }
+            }
         } while (a != 0);
         return true;
     }

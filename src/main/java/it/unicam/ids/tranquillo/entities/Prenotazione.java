@@ -1,11 +1,9 @@
 package it.unicam.ids.tranquillo.entities;
 
-import net.bytebuddy.asm.Advice;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+
 
 @Entity
 @Table(name="prenotazione")
@@ -69,11 +67,9 @@ public class Prenotazione {
     }
 
     @ManyToOne
-    @JoinColumn()
     private Attrezzatura attrezzatura;
 
     @ManyToOne()
-    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
     }
 

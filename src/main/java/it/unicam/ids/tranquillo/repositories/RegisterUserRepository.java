@@ -4,6 +4,8 @@ import it.unicam.ids.tranquillo.entities.Cliente;
 import it.unicam.ids.tranquillo.entities.RegisterUser;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 
 public interface RegisterUserRepository extends CrudRepository<RegisterUser, Integer> {
 
@@ -11,7 +13,8 @@ public interface RegisterUserRepository extends CrudRepository<RegisterUser, Int
 
     boolean existsByEmailAndAndPassword(String email,String password);
 
-    boolean existsByEmail(String email);
+    List<RegisterUser> findByEmail(String email);
 
-    boolean existsByPassword(String password);
+    boolean existsByEmail(String email);
+    boolean findByPassword(String password);
 }

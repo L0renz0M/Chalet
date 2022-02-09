@@ -22,7 +22,7 @@ public class CliView {
     @Autowired
     ProdottoBarService prodottoBarService;
     @Autowired
-    RegisterUserService logUserService;
+    RegisterUserService registerUserService;
     @Autowired
     RiservazioneAttivitaService riservazioneAttivitaService;
     @Autowired
@@ -54,7 +54,7 @@ public class CliView {
             Scanner selezioneNumero = new Scanner(System.in);
             int inpNum = selezioneNumero.nextInt()-1;
             Attrezzatura attrezzatura = listaAttrezzatura.get(inpNum);
-            this.prenotazioneService.createPrenotazioneMod(attrezzatura);
+            this.prenotazioneService.createPrenotazione(attrezzatura);
             System.out.println("Attrezzatura prenotata");
             break;
 
