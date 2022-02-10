@@ -73,7 +73,7 @@ public class CliView {
             System.out.println("inserisci la quantita per il prodotto  selezionato");
             Scanner qtaProd = new Scanner(System.in);
             int qta = qtaProd.nextInt();
-            this.ordinazioneService.createOridnazioneProdotti(prodottoBar, qta);
+            this.ordinazioneService.createOrdinazioneProdotti(prodottoBar, qta);
             System.out.println("\n"+"prodotto" + prodottoBar + "prenotato");
             System.out.println("proseguire con la prenotazione di un prodotto del bar?");
             Scanner inputBack= new Scanner(System.in);

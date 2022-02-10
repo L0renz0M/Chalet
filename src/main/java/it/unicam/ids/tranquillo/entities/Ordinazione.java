@@ -78,4 +78,15 @@ public class Ordinazione {
     @ManyToOne
     private Cliente cliente;
 
+    @Override
+    public String toString() {
+        return "Ordinazione{" +
+                "numeroOrdinazione=" + numeroOrdinazione +
+               "\n"+ ", consegnato=" + consegnato +
+                "\n"+ ", completato=" + completato +
+                "\n"+ ", quantita=" + quantita +
+                "\n"+ ", prodottoBar=" + prodottoBar +
+                "\n"+ ", cliente=" + cliente +
+                '}';
+    }
 }

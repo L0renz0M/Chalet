@@ -1,8 +1,10 @@
 package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Cliente;
+import it.unicam.ids.tranquillo.entities.Dipendente;
 import it.unicam.ids.tranquillo.entities.RegisterUser;
 import it.unicam.ids.tranquillo.repositories.ClienteRepository;
+import it.unicam.ids.tranquillo.repositories.DipendenteRepository;
 import it.unicam.ids.tranquillo.repositories.RegisterUserRepository;
 import it.unicam.ids.tranquillo.services.RegisterUserService;
 import it.unicam.ids.tranquillo.services.SessioneService;
@@ -20,6 +22,8 @@ public class UserView {
     RegisterUserRepository registerUserRepository;
     @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
+    DipendenteRepository dipendenteRepository;
 
     public int login() {
         int c;
@@ -57,9 +61,12 @@ public class UserView {
             System.out.println("inserisci password:");
             Scanner passInp = new Scanner(System.in);
             String pass = passInp.next();
-            this.registerUserService.checkCredenziali(em, pass);
-            return c = 2;//dipendente
-
+            if(this.registerUserService.checkCredenzialiDipendenti(em,pass)==true) {
+                return 2;//dipendente
+            }else{
+                System.out.println("login DIPENDENTE errato");
+                continue;
+            }
         }
     }
     public boolean registrazione() {
@@ -100,7 +107,31 @@ public class UserView {
         return true;
     }
 
-
+public void creazioneDip(){
+    System.out.println("INSERISCI LA MAIL PREDEFINITA PER I DIPENDENTI: ");
+    Scanner emInp = new Scanner(System.in);
+    String email = emInp.next();
+    System.out.println("\n"+"INSERISCI LA PASSSWORD PREDEFINITA PER LA REGISTRAZIONE: ");
+    Scanner passInp = new Scanner(System.in);
+    String pass = passInp.next();
+    if(this.registerUserService.checkCredenzialiDipendenti(email,pass)==false) {
+        System.out.println("LE CREDENZIALI INSERITE NON CORRISPONDONO ALLE PREDEFINITE");
+    }
+    else{
+    System.out.println("\n"+"INSERISCI I TUOI DATI: ");
+    System.out.println("\n"+"INSERISCI NOME: ");
+    Scanner nomeInp = new Scanner(System.in);
+    String nome= nomeInp.next();
+    System.out.println("\n"+"INSERISCI COGNOME: ");
+    Scanner cognomeInp = new Scanner(System.in);
+    String cognome= cognomeInp.next();
+    Dipendente dipendente = new Dipendente(nome,cognome);
+    this.dipendenteRepository.save(dipendente);
+    this.registerUserService.createdip(email, pass, dipendente);
+    System.out.println("\n" + "DIPENDENTE CREATO: " + email + pass + "\n" +
+            dipendente);
+}
+}
 
 
 }

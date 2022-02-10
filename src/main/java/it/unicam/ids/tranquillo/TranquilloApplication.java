@@ -36,28 +36,33 @@ public class TranquilloApplication implements CommandLineRunner {
 				"DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI O ACCEDERVI SE SI E' GIA REGISTRATI:");
 		System.out.println("SCEGLIERE :" +
 				"\n" + "1- PER EFFETTUARE IL LOGIN" +
-				"\n" + "2- PER EFFETTUARE LA REGISTRAZIONE");
+				"\n" + "2- PER EFFETTUARE LA REGISTRAZIONE"+
+				"\n"+"3- PER AGGIUNGERE PROFILO DIPENDENTE");
 		Scanner inp = new Scanner(System.in);
 		int a = inp.nextInt();
 		switch (a) {
 			case 1:
-
 				if (userView.login() == 1) {
 					cliView.start();
+					break;
 				} else {
 					dipendentiView.start();
+					break;
 				}
-				break;
+
 
 			case 2:
 				if (userView.registrazione() == true) {
 					if (userView.login() == 1) {
 						cliView.start();
-					} else {
+					} else if (userView.login()== 2){
 						dipendentiView.start();
 					}
 					break;
 				}
+			case 3:
+				userView.creazioneDip();
+				break;
 		}
 
 		}

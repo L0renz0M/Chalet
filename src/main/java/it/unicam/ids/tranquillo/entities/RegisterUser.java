@@ -20,6 +20,12 @@ public class RegisterUser {
        this.cliente=cliente;
     }
 
+    public RegisterUser(String email,String password,Dipendente dipendente) {
+        this.email = email;
+        this.password = password;
+        this.dipendente = dipendente;
+    }
+
     public RegisterUser() {
     }
 
@@ -62,4 +68,14 @@ public class RegisterUser {
     @OneToOne
     private Cliente cliente;
 
+    @OneToOne
+    private Dipendente dipendente;
+
+    public Dipendente getDipendente() {
+        return dipendente;
+    }
+
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
+    }
 }

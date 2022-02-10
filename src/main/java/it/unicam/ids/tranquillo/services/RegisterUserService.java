@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.services;
 
 import it.unicam.ids.tranquillo.entities.Cliente;
+import it.unicam.ids.tranquillo.entities.Dipendente;
 import it.unicam.ids.tranquillo.entities.RegisterUser;
 import it.unicam.ids.tranquillo.repositories.RegisterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class RegisterUserService {
         RegisterUser user = new RegisterUser(email,password, cliente);
         this.registerUserRepository.save(user);
     }
+    public void createdip(String email,String password, Dipendente dipendente) {
+        email="dipendenti@chalet.it";
+        password="dipendente1";
+        RegisterUser dip = new RegisterUser(email,password, dipendente);
+        this.registerUserRepository.save(dip);
+    }
 
     public boolean checkCredenziali(String em, String pass) {
         List<RegisterUser> users = this.registerUserRepository.findByEmail(em);
@@ -34,6 +41,8 @@ public class RegisterUserService {
     return false;
     }
 
+
+
     public RegisterUser getUserByEmail(String email) {
         List<RegisterUser> users = this.registerUserRepository.findByEmail(email);
         if (users.size() > 0) {
@@ -44,7 +53,15 @@ public class RegisterUserService {
     }
 
 
-
+    public boolean checkCredenzialiDipendenti(String em, String pass) {
+        if (em.equals("dipendenti@chalet.com") && pass.equals("dipendente1")){
+            System.out.print("LOGIN DIPENDENTE AVVENUTO  CON SUCCESSO");
+                return true;
+            }else{
+            System.out.print("LOGIN NON AVVENUTO CREDENZIALI DIPENDENTE ERRATE");
+            return false;
+        }
+    }
 
 
 }

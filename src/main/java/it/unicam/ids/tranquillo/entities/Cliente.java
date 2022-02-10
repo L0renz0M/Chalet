@@ -1,7 +1,7 @@
 package it.unicam.ids.tranquillo.entities;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 
 @Entity
@@ -10,7 +10,6 @@ public class Cliente {
     private String nome;
     private String cognome;
     private String email;
-
 
     public Cliente(String nome, String cognome,String email) {
         this.nome = nome;
@@ -40,7 +39,17 @@ public class Cliente {
         this.email = email;
     }
 
-
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", prenotazione=" + prenotazione +
+                ", ordinazione=" + ordinazione +
+                '}';
+    }
 
     @OneToOne
     private Prenotazione prenotazione;

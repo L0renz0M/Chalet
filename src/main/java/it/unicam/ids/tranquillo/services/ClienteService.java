@@ -12,7 +12,8 @@ public class ClienteService {
 
 
     public void createCliente(Cliente cliente){
-         this.clienteRepository.save(cliente);
+
+        this.clienteRepository.save(cliente);
     }
 
 
