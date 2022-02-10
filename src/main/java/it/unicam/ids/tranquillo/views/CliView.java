@@ -46,7 +46,7 @@ public class CliView {
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
-    String back;
+    String back = null;
     switch (a){
         case 1:
            do {
@@ -56,7 +56,7 @@ public class CliView {
                    System.out.println("Lista attrezzatura vuota");
                    break;
                }
-               System.out.println("inserisci il numero dell'attrezzatura da selezionare" + listaAttrezzatura.size());//controllo personale
+               System.out.println("inserisci il numero dell'attrezzatura da selezionare");//controllo personale
                Scanner selezioneNumero = new Scanner(System.in);
                int inpNum = selezioneNumero.nextInt() ;
                Attrezzatura attrezzatura= this.attrezzaturaService.selectAttrezzatura(inpNum);
@@ -96,10 +96,11 @@ public class CliView {
            }while(!back.startsWith("no"));
             break;
         case 2:
-           do{
+            if(this.prenotazioneService.puoPrenotare()==true){
+                do{
             List<ProdottoBar> listaProdottiBar = this.prodottoBarService.getProdottiBar();
             System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
-            System.out.println("inserisci il numero del prodotto da selezionare" + listaProdottiBar.size());
+            System.out.println("inserisci il numero del prodotto da selezionare" );
             Scanner selezioneProd = new Scanner(System.in);
             int inpProd = selezioneProd.nextInt();
             ProdottoBar prodottoBar = this.prodottoBarService.selectProdottoBar(inpProd);
@@ -107,13 +108,15 @@ public class CliView {
             Scanner qtaProd = new Scanner(System.in);
             int qta = qtaProd.nextInt();
             this.ordinazioneService.createOrdinazioneProdotti(prodottoBar, qta);
-            System.out.println("\n"+"prodotto" + prodottoBar + "prenotato");
+            System.out.println("\n" + "prodotto" + prodottoBar + "prenotato");
             System.out.println("proseguire con la prenotazione di un prodotto del bar?");
             Scanner inputBack= new Scanner(System.in);
             back = inputBack.next();
-        }while(!back.startsWith("no"));
-            break;
 
+                  }while(!back.startsWith("no"));
+    }
+            break;
+    
         case 3:
             do{
                 List<AttivitaSportiva> listaAttivitaSportiva = this.attivitaSportivaService.getAttivitaSportiva();

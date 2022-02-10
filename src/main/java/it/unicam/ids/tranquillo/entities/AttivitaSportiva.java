@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.w3c.dom.Text;
 
 import javax.persistence.*;
 

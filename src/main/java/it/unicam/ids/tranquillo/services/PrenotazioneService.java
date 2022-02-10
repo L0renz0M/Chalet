@@ -5,6 +5,7 @@ import it.unicam.ids.tranquillo.entities.Attrezzatura;
 import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.repositories.AttrezzaturaRepository;
 import it.unicam.ids.tranquillo.repositories.PrenotazioneRepository;
+import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,8 @@ public class PrenotazioneService {
     PrenotazioneRepository prenotazioneRepository;
     @Autowired
     AttrezzaturaRepository attrezzaturaRepository;
-
+    @Autowired
+    Tipo_AttrezzaturaRepository tipo_attrezzaturaRepository;
     public void createPrenotazione(Attrezzatura attrezzatura, Date checkin,Date checkout) {
         if (attrezzatura.isPrenotato() == false) {
             Prenotazione prenotazione = new Prenotazione(attrezzatura,checkin,checkout);
@@ -34,7 +36,15 @@ public class PrenotazioneService {
         return this.prenotazioneRepository.findAll();
     }
 
-
+ public boolean puoPrenotare(){
+        SessioneService sessione = SessioneService.getInstance();
+        int id= sessione.getCliente().getId();
+       if(this.prenotazioneRepository.existsByCliente_Id(id)){
+           return true;
+       }
+       System.out.println("Per poter ordinare prodotti al bar bisogna aver prenotato un ombrellone");
+       return false;
+ }
 }
 
  /* public void createPrenotazione(Prenotazione prenotazione){

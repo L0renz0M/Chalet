@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 public class Cliente {
-    @Id @GeneratedValue(strategy= GenerationType.TABLE) private Integer id;
+    @Id @GeneratedValue(strategy= GenerationType.TABLE) private int id;
     private String nome;
     private String cognome;
     private String email;
