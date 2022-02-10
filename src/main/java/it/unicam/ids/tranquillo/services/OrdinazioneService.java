@@ -27,13 +27,20 @@ public class OrdinazioneService {
 public List<Ordinazione> getListaOrdinazioni(){
         return this.ordinazioneRepository.findAllByCompletatoIsFalse();
 }
-
+    public List<Ordinazione> getListaOrdinazioniConsegnare(){
+        return this.ordinazioneRepository.findAllByCompletatoIsTrueAndAndConsegnatoIsFalse();
+    }
 public void selectOrdinazione(int numeroOrd){
         Ordinazione ordinazione = this.ordinazioneRepository.findByNumeroOrdinazione(numeroOrd);
         ordinazione.setCompletato(true);
         this.ordinazioneRepository.save(ordinazione);
-        System.out.println("oridnazione aggiornata ");
+        System.out.println("oridnazione aggiornata e presa in carico ");
 }
-
+public void consegnaOrdinazione(int numeroOrd){
+    Ordinazione ordinazione = this.ordinazioneRepository.findByNumeroOrdinazione(numeroOrd);
+    ordinazione.setConsegnato(true);
+    this.ordinazioneRepository.save(ordinazione);
+    System.out.println("ordine consegnato al cliente ");
+}
 
 }

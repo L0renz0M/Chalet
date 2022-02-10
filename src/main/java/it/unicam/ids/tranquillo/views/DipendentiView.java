@@ -71,7 +71,7 @@ public class DipendentiView {
                     "\n 1- per inserire un'attrezzatura per la spiaggia " +
                     "\n 2-  per creare una nuova ATTIVITA' SPORTIVA" +
                     "\n 3- per GESTIRE ORDINAZIONI BAR CLIENTI " +
-                    "\n 4- " +
+                    "\n 4- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
                     "\n 0- per uscire dal menu");
             Scanner in = new Scanner(System.in);
             b = in.nextInt();
@@ -91,9 +91,16 @@ public class DipendentiView {
                     int numeroOrd= numOrdInp.nextInt();
                     this.ordinazioneService.selectOrdinazione(numeroOrd);
                     break;
-
+                case 4:
+                    List<Ordinazione> ordinazioniCompletate = this.ordinazioneService.getListaOrdinazioniConsegnare();
+                    System.out.println("Elenco ordinazioni pronte per essere consegnate:"+ordinazioniCompletate);
+                    System.out.println("selezionare ordinazione da consegnare");
+                    numOrdInp= new Scanner(System.in);
+                    numeroOrd= numOrdInp.nextInt();
+                    this.ordinazioneService.consegnaOrdinazione(numeroOrd);
+                    break;
             }
-        }while (b != 0);
+    }while (b != 0);
 
     }
 

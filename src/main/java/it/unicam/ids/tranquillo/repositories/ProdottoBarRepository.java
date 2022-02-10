@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProdottoBarRepository extends CrudRepository<ProdottoBar, Integer> {
 
+    ProdottoBar findByCodiceP(int codice);
 
 }

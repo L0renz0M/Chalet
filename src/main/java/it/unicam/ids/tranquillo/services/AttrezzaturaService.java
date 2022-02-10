@@ -53,6 +53,9 @@ public class AttrezzaturaService {
         return this.attrezzaturaRepository.findAllByPrenotatoIsFalse() ;
     }
 
-
+public Attrezzatura selectAttrezzatura(int id){
+      Attrezzatura attrezzatura = this.attrezzaturaRepository.findById(id);
+      return attrezzatura;
+}
 
 }

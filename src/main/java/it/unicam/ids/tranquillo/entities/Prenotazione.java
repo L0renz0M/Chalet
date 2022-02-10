@@ -17,9 +17,9 @@ public class Prenotazione {
     public Prenotazione() {
     }
 
-    public Prenotazione(Attrezzatura attrezzatura) {
-        this.checkIn = new Date();
-        this.checkOut = new Date();
+    public Prenotazione(Attrezzatura attrezzatura,Date checkIn,Date checkOut) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         this.attrezzatura = attrezzatura;
 
     }

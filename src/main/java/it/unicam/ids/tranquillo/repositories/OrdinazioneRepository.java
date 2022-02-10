@@ -9,5 +9,6 @@ public interface OrdinazioneRepository extends CrudRepository<Ordinazione, Integ
 
     List<Ordinazione> findAllByCompletatoIsFalse();
     Ordinazione findByNumeroOrdinazione(int numeroOrd);
+    List<Ordinazione> findAllByCompletatoIsTrueAndAndConsegnatoIsFalse();
 
 }

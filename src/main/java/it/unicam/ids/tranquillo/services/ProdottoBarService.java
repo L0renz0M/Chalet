@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.services;
 
 
+import it.unicam.ids.tranquillo.entities.Attrezzatura;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.repositories.ProdottoBarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class ProdottoBarService {
         return prod;
     }
 
-
+    public ProdottoBar selectProdottoBar(int codice){
+        ProdottoBar prodottoBar = this.prodottoBarRepository.findByCodiceP(codice);
+        return prodottoBar;
+    }
 
 }

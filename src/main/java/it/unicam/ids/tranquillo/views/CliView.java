@@ -2,12 +2,18 @@ package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.AttivitaSportiva;
 import it.unicam.ids.tranquillo.entities.Attrezzatura;
+import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 @Component
@@ -52,10 +58,37 @@ public class CliView {
                }
                System.out.println("inserisci il numero dell'attrezzatura da selezionare" + listaAttrezzatura.size());//controllo personale
                Scanner selezioneNumero = new Scanner(System.in);
-               int inpNum = selezioneNumero.nextInt() - 1;
-               Attrezzatura attrezzatura = listaAttrezzatura.get(inpNum);
-               this.prenotazioneService.createPrenotazione(attrezzatura);
+               int inpNum = selezioneNumero.nextInt() ;
+               Attrezzatura attrezzatura= this.attrezzaturaService.selectAttrezzatura(inpNum);
+
+               System.out.println("Inserire date per la prenotazione: checkin -- checkout [gg/mm/yyyy] :");
+               Date checkinDate =null;
+               Scanner checkinInp = new Scanner(System.in);
+               String checkin = checkinInp.next();
+               try{
+                   DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                   //imposta che i calcoli di conversione della data siano rigorosi
+                   formatoData.setLenient(false);
+                   checkinDate = formatoData.parse(checkin);
+               } catch (ParseException e) {
+                   System.out.println("Formato data non valido.");
+               }
+               Date checkOutDate =null;
+               Scanner checkOutInp = new Scanner(System.in);
+               String checkout = checkOutInp.next();
+               try{
+                   DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                   //imposta che i calcoli di conversione della data siano rigorosi
+                   formatoData.setLenient(false);
+                   checkOutDate = formatoData.parse(checkout);
+               } catch (ParseException e) {
+                   System.out.println("Formato data non valido.");
+               }
+               List<Prenotazione>listaPrenotazioni =this.prenotazioneService.getListaPrenotazioni();
+               if(!listaPrenotazioni.equals(checkinDate)&&!listaPrenotazioni.equals(checkout)){
+               this.prenotazioneService.createPrenotazione(attrezzatura,checkinDate,checkOutDate);
                System.out.println("Attrezzatura prenotata");
+               }
                System.out.println("proseguire con la prenotazione di un'attrezzatura?");
                Scanner inputBack = new Scanner(System.in);
                back = inputBack.next();
@@ -68,8 +101,8 @@ public class CliView {
             System.out.println("Lista prodotti bar disponibili nello chalet" + "\n" + listaProdottiBar);
             System.out.println("inserisci il numero del prodotto da selezionare" + listaProdottiBar.size());
             Scanner selezioneProd = new Scanner(System.in);
-            int inpProd = selezioneProd.nextInt() - 1;
-            ProdottoBar prodottoBar = listaProdottiBar.get(inpProd);
+            int inpProd = selezioneProd.nextInt();
+            ProdottoBar prodottoBar = this.prodottoBarService.selectProdottoBar(inpProd);
             System.out.println("inserisci la quantita per il prodotto  selezionato");
             Scanner qtaProd = new Scanner(System.in);
             int qta = qtaProd.nextInt();

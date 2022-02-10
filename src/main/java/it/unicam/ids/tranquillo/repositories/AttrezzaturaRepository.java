@@ -12,6 +12,7 @@ public interface AttrezzaturaRepository extends CrudRepository<Attrezzatura,Inte
 
   List<Attrezzatura> findAllByPrenotatoIsFalse();
 
+  Attrezzatura findById(int id);
 
 
 
