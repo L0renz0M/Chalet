@@ -21,6 +21,7 @@ public class DipendentiView {
     AttivitaSportivaService attivitaSportivaService;
     @Autowired
     OrdinazioneService ordinazioneService;
+
     public void caricamentoAttrezzaturaSpiaggia() {
         int b;
         do {
@@ -78,10 +79,10 @@ public class DipendentiView {
             switch (b) {
                 case 1:
                     caricamentoAttrezzaturaSpiaggia();
-
+                    break;
                 case 2:
                     this.attivitaSportivaService.createAttivitaSportiva();
-
+                    break;
 
                 case 3:
                     List<Ordinazione> ordinazioneList=this.ordinazioneService.getListaOrdinazioni();

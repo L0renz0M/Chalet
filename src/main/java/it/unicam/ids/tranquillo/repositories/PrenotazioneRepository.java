@@ -1,5 +1,6 @@
 package it.unicam.ids.tranquillo.repositories;
 
+import it.unicam.ids.tranquillo.entities.Cliente;
 import it.unicam.ids.tranquillo.entities.Prenotazione;
 
 import org.springframework.data.repository.CrudRepository;
@@ -10,5 +11,9 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Int
 
 List<Prenotazione> findAll();
 boolean existsByCliente_Id(int id);
+
+
+
+
 
 }

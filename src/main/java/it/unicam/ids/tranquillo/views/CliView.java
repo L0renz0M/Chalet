@@ -6,7 +6,6 @@ import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
@@ -47,21 +46,12 @@ public class CliView {
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
     String back = null;
+    boolean checkInAtMorning = true ;
+    boolean checkOutAtMorning = false ;
     switch (a){
         case 1:
            do {
-               List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotaate();
-               System.out.println("Lista attrezzatura disponibili" + "\n" + listaAttrezzatura);
-               if (listaAttrezzatura.size() <= 0) {
-                   System.out.println("Lista attrezzatura vuota");
-                   break;
-               }
-               System.out.println("inserisci il numero dell'attrezzatura da selezionare");//controllo personale
-               Scanner selezioneNumero = new Scanner(System.in);
-               int inpNum = selezioneNumero.nextInt() ;
-               Attrezzatura attrezzatura= this.attrezzaturaService.selectAttrezzatura(inpNum);
-
-               System.out.println("Inserire date per la prenotazione: checkin -- checkout [gg/mm/yyyy] :");
+               System.out.println("Inserire le date per la prenotazione: checkin -- checkout [gg/mm/yyyy] :");
                Date checkinDate =null;
                Scanner checkinInp = new Scanner(System.in);
                String checkin = checkinInp.next();
@@ -84,11 +74,36 @@ public class CliView {
                } catch (ParseException e) {
                    System.out.println("Formato data non valido.");
                }
-               List<Prenotazione>listaPrenotazioni =this.prenotazioneService.getListaPrenotazioni();
-               if(!listaPrenotazioni.equals(checkinDate)&&!listaPrenotazioni.equals(checkout)){
-               this.prenotazioneService.createPrenotazione(attrezzatura,checkinDate,checkOutDate);
-               System.out.println("Attrezzatura prenotata");
+               if(checkinDate.compareTo(checkOutDate) == 0) {
+                   System.out.println("il checkin e il checkout corrispondono pernotare per tutta la giornata o solo per mezza ?");
+                   Scanner inputScelta = new Scanner(System.in);
+                   String scelta = inputScelta.next();
+                   if (scelta.startsWith("mezza")) {
+                       System.out.println("Mattina o pomeriggio");
+                       Scanner inputOra = new Scanner(System.in);
+                       String ora = inputScelta.next();
+                       if (ora.startsWith("mattina")) {
+                           checkInAtMorning = true;
+                           checkOutAtMorning = true;
+
+                       }else {
+                           checkInAtMorning = false;
+                           checkOutAtMorning = false;
+                       }
+                       }
+                   }
+               List<Attrezzatura> listaAttrezzatura = this.attrezzaturaService.getAttrezzaturaNonPrenotateAtDate(checkinDate,checkOutDate,checkInAtMorning,checkOutAtMorning);
+               System.out.println("Lista attrezzatura disponibili" + "\n" + listaAttrezzatura);
+               if (listaAttrezzatura.size() <= 0) {
+                   System.out.println("Lista attrezzatura vuota");
+                   break;
                }
+               System.out.println("inserisci il numero dell'attrezzatura da selezionare");//controllo personale
+               Scanner selezioneNumero = new Scanner(System.in);
+               int inpNum = selezioneNumero.nextInt() ;
+               Attrezzatura attrezzatura= this.attrezzaturaService.selectAttrezzatura(inpNum);
+               this.prenotazioneService.createPrenotazione(attrezzatura,checkinDate,checkOutDate, checkInAtMorning, checkOutAtMorning);
+               System.out.println("Attrezzatura prenotata");
                System.out.println("proseguire con la prenotazione di un'attrezzatura?");
                Scanner inputBack = new Scanner(System.in);
                back = inputBack.next();

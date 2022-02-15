@@ -12,15 +12,29 @@ public class Prenotazione {
     @Id @GeneratedValue (strategy=GenerationType.TABLE) private int numeroPrenotazione;
     private Date checkIn;
     private Date checkOut;
+    boolean checkInAtMorning;
+    boolean checkOutAtMorning;
 
 
-    public Prenotazione() {
-    }
-
+/*
     public Prenotazione(Attrezzatura attrezzatura,Date checkIn,Date checkOut) {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.attrezzatura = attrezzatura;
+        this.checkInAtMorning = true;
+        this.checkOutAtMorning = false;
+    }
+*/
+
+    public Prenotazione( Date checkIn, Date checkOut, boolean checkInAtMorning, boolean checkOutAtMorning, Attrezzatura attrezzatura) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.checkInAtMorning = checkInAtMorning;
+        this.checkOutAtMorning = checkOutAtMorning;
+        this.attrezzatura = attrezzatura;
+    }
+
+    public Prenotazione() {
 
     }
 
@@ -31,6 +45,22 @@ public class Prenotazione {
 
     public void setNumeroPrenotazione(int numeroPrenotazione) {
         this.numeroPrenotazione = numeroPrenotazione;
+    }
+
+    public boolean isCheckInAtMorning() {
+        return checkInAtMorning;
+    }
+
+    public void setCheckInAtMorning(boolean checkInAtMorning) {
+        this.checkInAtMorning = checkInAtMorning;
+    }
+
+    public boolean isCheckOutAtMorning() {
+        return checkOutAtMorning;
+    }
+
+    public void setCheckOutAtMorning(boolean checkOutAtMorning) {
+        this.checkOutAtMorning = checkOutAtMorning;
     }
 
     public Date getCheckIn() {

@@ -50,4 +50,11 @@ public class Attrezzatura {
                 "\n"+ "prenotato="+prenotato+
                 '}';
     }
+    @Override//cambiato il modo di confrontare l'attrezzatura
+    public boolean equals(Object o){
+        if (o instanceof Attrezzatura) {
+        return    ((Attrezzatura) o).id==this.id;
+        }
+        return false;
+    }
 }

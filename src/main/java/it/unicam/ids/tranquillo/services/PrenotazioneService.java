@@ -9,6 +9,7 @@ import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,15 +22,15 @@ public class PrenotazioneService {
     AttrezzaturaRepository attrezzaturaRepository;
     @Autowired
     Tipo_AttrezzaturaRepository tipo_attrezzaturaRepository;
-    public void createPrenotazione(Attrezzatura attrezzatura, Date checkin,Date checkout) {
-        if (attrezzatura.isPrenotato() == false) {
-            Prenotazione prenotazione = new Prenotazione(attrezzatura,checkin,checkout);
+
+     public void createPrenotazione(Attrezzatura attrezzatura, Date checkin,Date checkout,boolean checkInAtMorning, boolean checkOutAtMorning) {
+            Prenotazione prenotazione = new Prenotazione(checkin,checkout,checkInAtMorning, checkOutAtMorning,attrezzatura);
             attrezzatura.setPrenotato(true);
             SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
             prenotazione.setCliente(sessione.getCliente());
             this.attrezzaturaRepository.save(attrezzatura);
             this.prenotazioneRepository.save(prenotazione);
-        }
+
     }
 
     public List<Prenotazione> getListaPrenotazioni(){
@@ -37,13 +38,21 @@ public class PrenotazioneService {
     }
 
  public boolean puoPrenotare(){
-        SessioneService sessione = SessioneService.getInstance();
-        int id= sessione.getCliente().getId();
-       if(this.prenotazioneRepository.existsByCliente_Id(id)){
-           return true;
-       }
-       System.out.println("Per poter ordinare prodotti al bar bisogna aver prenotato un ombrellone");
-       return false;
+     SessioneService sessione = SessioneService.getInstance();
+     int id = sessione.getCliente().getId();
+     Date data = new Date();
+     List<Prenotazione> listaPrenotazioni = this.prenotazioneRepository.findAll();
+     for (Prenotazione prenotazione : listaPrenotazioni) {
+         if (prenotazione.getCliente().getId() != id) {
+             continue;
+         }
+         if (prenotazione.getCheckIn().compareTo(data) < 0 && prenotazione.getCheckOut().compareTo(data) > 0) {
+             return true;
+
+         }
+     }
+     return false;
+
  }
 }
 
