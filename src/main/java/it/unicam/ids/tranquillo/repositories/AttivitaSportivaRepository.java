@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AttivitaSportivaRepository extends CrudRepository<AttivitaSportiva,Integer> {
 
+AttivitaSportiva findByCodiceAttivita(int codiceA);
 
 }

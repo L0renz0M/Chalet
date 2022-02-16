@@ -54,7 +54,7 @@ public class RegisterUserService {
 
 
     public boolean checkCredenzialiDipendenti(String em, String pass) {
-        if (em.equals("dipendenti@chalet.com") && pass.equals("dipendente1")){
+        if ((em.equals("dipendenti@chalet.it") || em.equals("dipendenti@chalet.it"))&& pass.equals("dipendente1")){
             System.out.print("LOGIN DIPENDENTE AVVENUTO  CON SUCCESSO");
                 return true;
             }else{

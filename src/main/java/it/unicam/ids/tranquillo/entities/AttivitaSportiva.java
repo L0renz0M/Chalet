@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.w3c.dom.Text;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -12,12 +13,12 @@ public class AttivitaSportiva {
     private String nomeAttvita;
     private int numeroPosti;
     private String descrizione;
-    @DateTimeFormat private String dataOraAttiva;
+    private Date dataOraAttiva;
 
 
     public AttivitaSportiva() { }
 
-    public AttivitaSportiva(String nomeAttvita, int numeroPosti, String descrizione, String dataOraAttiva) {
+    public AttivitaSportiva(String nomeAttvita, int numeroPosti, String descrizione, Date dataOraAttiva) {
         this.nomeAttvita = nomeAttvita;
         this.numeroPosti = numeroPosti;
         this.descrizione = descrizione;
@@ -56,12 +57,11 @@ public class AttivitaSportiva {
         this.descrizione = descrizione;
     }
 
-
-    public String getDataOraAttiva() {
+    public Date getDataOraAttiva() {
         return dataOraAttiva;
     }
 
-    public void setDataOraAttiva(String dataOraAttiva) {
+    public void setDataOraAttiva(Date dataOraAttiva) {
         this.dataOraAttiva = dataOraAttiva;
     }
 

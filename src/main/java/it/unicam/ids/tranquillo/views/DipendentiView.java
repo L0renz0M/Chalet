@@ -36,7 +36,6 @@ public class DipendentiView {
             b = in.nextInt();
             switch (b) {
                 case 1:
-
                     try {
                         this.attrezzaturaService.createAttrezzatura("Ombrellone");
                     } catch (IllegalArgumentException e) {
@@ -57,7 +56,7 @@ public class DipendentiView {
                     break;
 
                 case 3:
-
+                    break;
 
             }
         }
@@ -67,10 +66,10 @@ public class DipendentiView {
     public void start() {
         int b;
         do {
-            System.out.println("seleziona azione da svolgere come dipendente" +
+            System.out.println("\n"+"Seleziona azione da svolgere come dipendente" +
                     "\n digita: " +
-                    "\n 1- per inserire un'attrezzatura per la spiaggia " +
-                    "\n 2-  per creare una nuova ATTIVITA' SPORTIVA" +
+                    "\n 1- per INSERIRE ATTREZZATURA SPIAGGIA " +
+                    "\n 2- per CREARE ATTIVITA' SPORTIVA" +
                     "\n 3- per GESTIRE ORDINAZIONI BAR CLIENTI " +
                     "\n 4- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
                     "\n 0- per uscire dal menu");

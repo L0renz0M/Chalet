@@ -46,14 +46,26 @@ public class PrenotazioneService {
          if (prenotazione.getCliente().getId() != id) {
              continue;
          }
-         if (prenotazione.getCheckIn().compareTo(data) < 0 && prenotazione.getCheckOut().compareTo(data) > 0) {
+         if (prenotazione.getCheckIn().compareTo(data) <= 0 && prenotazione.getCheckOut().compareTo(data) >= 0) {
              return true;
 
          }
      }
      return false;
 
- }
+     }
+
+
+     public List<Prenotazione> getSommarioPrenot(){
+         SessioneService sessione = SessioneService.getInstance();
+         int id = sessione.getCliente().getId();
+         List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_Id(id);
+         return listaPrenotazioniCliente;
+     }
+
+
+
+
 }
 
  /* public void createPrenotazione(Prenotazione prenotazione){

@@ -50,7 +50,7 @@ public class UserView {
                     return 1;
                 }
                 else{
-                    System.out.println("LOGIN ERRATO");
+                    System.out.println("\n"+"LOGIN ERRATO");
                     continue;
                 }
             }
@@ -64,7 +64,7 @@ public class UserView {
             if(this.registerUserService.checkCredenzialiDipendenti(em,pass)==true) {
                 return 2;//dipendente
             }else{
-                System.out.println("login DIPENDENTE errato");
+                System.out.println("\n"+"login DIPENDENTE errato");
                 continue;
             }
         }

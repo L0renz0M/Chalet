@@ -55,4 +55,10 @@ public class RiservazioneAttivita {
     @ManyToOne
     private AttivitaSportiva attivitaSportiva;
 
+    @Override
+    public String toString() {
+        return  "\n"+ " numeroRiservazione= " + numeroRiservazione +
+                "\n"+ " postiPrenotati= " + postiPrenotati +
+                "\n"+ " attivitaSportiva= " + attivitaSportiva ;
+    }
 }

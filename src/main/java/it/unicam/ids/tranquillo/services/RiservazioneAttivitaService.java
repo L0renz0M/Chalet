@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.services;
 
 import it.unicam.ids.tranquillo.entities.AttivitaSportiva;
+import it.unicam.ids.tranquillo.entities.Ordinazione;
 import it.unicam.ids.tranquillo.entities.RiservazioneAttivita;
 import it.unicam.ids.tranquillo.repositories.AttivitaSportivaRepository;
 import it.unicam.ids.tranquillo.repositories.RiservazioneAttivitaRepository;
@@ -31,6 +32,13 @@ public class RiservazioneAttivitaService {
         }
     }
 
+
+    public List<RiservazioneAttivita> getSommarioRiseerv(){
+        SessioneService sessione = SessioneService.getInstance();
+        int id = sessione.getCliente().getId();
+        List<RiservazioneAttivita> listaRiservazioniCliente = this.riservazioneAttivitaRepository.findAllByCliente_Id(id);
+        return listaRiservazioniCliente;
+    }
 
 
 

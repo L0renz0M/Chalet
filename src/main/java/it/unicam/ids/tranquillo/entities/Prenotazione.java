@@ -101,7 +101,18 @@ public class Prenotazione {
 
     @ManyToOne()
     private Cliente cliente;
+
+    @Override
+    public String toString() {
+        return  "\n"+ "numeroPrenotazione= " + numeroPrenotazione +
+                "\n"+ " checkIn= " + checkIn +
+                "\n"+ " checkOut= " + checkOut +
+                "\n"+ " checkInMattina= " + checkInAtMorning +
+                "\n"+ " checkOutMattina= " + checkOutAtMorning +
+                "\n"+ attrezzatura
+                ;
     }
+}
 
 
 

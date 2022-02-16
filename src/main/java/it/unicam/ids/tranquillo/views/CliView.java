@@ -1,9 +1,6 @@
 package it.unicam.ids.tranquillo.views;
 
-import it.unicam.ids.tranquillo.entities.AttivitaSportiva;
-import it.unicam.ids.tranquillo.entities.Attrezzatura;
-import it.unicam.ids.tranquillo.entities.Prenotazione;
-import it.unicam.ids.tranquillo.entities.ProdottoBar;
+import it.unicam.ids.tranquillo.entities.*;
 import it.unicam.ids.tranquillo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,12 +30,16 @@ public class CliView {
     @Autowired
     AttivitaSportivaService attivitaSportivaService;
 
+
     public void start(){
       int a;
     do{
-    System.out.println("\n"+"MENU PER PRENOTAZIONE ATTREZZATURA SPIAGGIA"+
+        SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
+        sessione.getCliente();
+    System.out.println("\n"+"BENVENUTO "+sessione.getCliente().getNome()+" " + sessione.getCliente().getCognome()+
+            "\n"+"MENU PER PRENOTAZIONE ATTREZZATURA SPIAGGIA"+
             "\n digita:" +
-            "\n 1- per prenotare un'attrezzatura " +//prenotare per noi=creazione ombrellone
+            "\n 1- per prenotare un'attrezzatura " +
             "\n 2- per prenotare un prodotto del bar" +
             "\n 3- per prenotare un'attivita sportiva" +
             "\n 4- per ricapitolare le prorpie prenotazioni" +
@@ -140,10 +141,10 @@ public class CliView {
                     System.out.println("Lista attività vuota");
                     break;
                 }
-                System.out.println("inserisci il numero dell'attivitao da selezionare" + listaAttivitaSportiva.size());
+                System.out.println("inserisci il numero dell'attivitao da selezionare" );
                 Scanner selezioneAtt = new Scanner(System.in);
-                int inpAtt = selezioneAtt.nextInt() - 1;
-                AttivitaSportiva attivitaSportiva = listaAttivitaSportiva.get(inpAtt);
+                int inpAtt = selezioneAtt.nextInt();
+                AttivitaSportiva attivitaSportiva = this.attivitaSportivaService.selectAttivitaSportiva(inpAtt);
                 System.out.println("inserisci il numero di posti da riservare per l'attivita");
                 Scanner qtaPosti = new Scanner(System.in);
                 int qta = qtaPosti.nextInt();
@@ -155,6 +156,17 @@ public class CliView {
             }while(!back.startsWith("no"));
             break;
         case 4:
+            sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
+            sessione.getCliente();
+
+            List<Prenotazione>prenotazioniEffettuate =this.prenotazioneService.getSommarioPrenot();
+            List<Ordinazione> ordinazioniEffettuate = this.ordinazioneService.getSommarioOrdin();
+            List<RiservazioneAttivita>riservazioniEffettuate=this.riservazioneAttivitaService.getSommarioRiseerv();
+
+            System.out.println(riservazioniEffettuate);
+            System.out.println(ordinazioniEffettuate);
+            System.out.println(prenotazioniEffettuate);
+            break;
     }
     }
     while (a!=0);
