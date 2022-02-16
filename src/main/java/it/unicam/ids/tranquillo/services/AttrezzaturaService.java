@@ -46,51 +46,49 @@ public class AttrezzaturaService {
         List<Attrezzatura> listaAttrezzature = this.attrezzaturaRepository.findAll();
         List<Attrezzatura> attrezzatureNonPrenotate = this.attrezzaturaRepository.findAll();
 
-        for(Prenotazione prenotazione : listaPrenotazioni){
+        for(Prenotazione prenotazione : listaPrenotazioni) {
             Date dataPrenotazioneI = prenotazione.getCheckIn();
             Date dataPrenotazioneO = prenotazione.getCheckOut();
             Attrezzatura atrzToRemove = prenotazione.getAttrezzatura(); //atrz che potrebbe non andare bene per la prentoaz
-            System.out.println("verifica if");
-            if(checkIn.compareTo(dataPrenotazioneI)>0 && checkIn.compareTo(dataPrenotazioneO)<=0){
-                if(checkIn.compareTo(dataPrenotazioneO)==0){
-                    if(!prenotazione.isCheckOutAtMorning() || checkInAtMorning){
-                      //attrezzatureNonPrenotate.
-                        boolean a = attrezzatureNonPrenotate.remove(atrzToRemove);
-                       // attrezzatureNonPrenotate.remove(atrzToRemove);
-                        System.out.println("rimozione avvenutaAAAAA");
-                        System.out.println(a);
-                    } //nel blocco degli if manca controllo per checkin è< della data e out>data
 
-                }else{
-                    boolean a = attrezzatureNonPrenotate.remove(atrzToRemove);
-                    // attrezzatureNonPrenotate.remove(atrzToRemove);
-                    System.out.println("rimozione avvenutaAAAAA");
-                    System.out.println(a);
-                   // attrezzatureNonPrenotate.remove(atrzToRemove);
-                }
-
+            if(checkIn.compareTo(dataPrenotazioneI)<0 && checkOut.compareTo(dataPrenotazioneI)<0){
+                return listaAttrezzature;
             }
-            if(checkOut.compareTo(dataPrenotazioneI)>=0 && checkOut.compareTo(dataPrenotazioneO)<0){
-                if(checkOut.compareTo(dataPrenotazioneI)==0){
-                    if(prenotazione.isCheckInAtMorning() || !checkOutAtMorning){
-                        boolean a = attrezzatureNonPrenotate.remove(atrzToRemove);
-                        // attrezzatureNonPrenotate.remove(atrzToRemove);
-                        System.out.println("rimozione avvenutaAAAAA");
-                        System.out.println(a);
-                        //attrezzatureNonPrenotate.remove(atrzToRemove);
+            if(checkIn.compareTo(dataPrenotazioneO)>0 && checkOut.compareTo(dataPrenotazioneO)>0){
+                return listaAttrezzature;
+            }
+
+
+            if (checkIn.compareTo(dataPrenotazioneI) > 0 || checkIn.compareTo(dataPrenotazioneO) <= 0){
+                    if (checkIn.compareTo(dataPrenotazioneO) == 0) {
+                        if (!prenotazione.isCheckOutAtMorning() && checkInAtMorning) { //prima or
+                            attrezzatureNonPrenotate.remove(atrzToRemove);
+                        } //nel blocco degli if manca controllo per checkin è< della data e out>data
+
+                    } else {
+                        attrezzatureNonPrenotate.remove(atrzToRemove);
+
                     }
-                }else{
-                    boolean a = attrezzatureNonPrenotate.remove(atrzToRemove);
-                    // attrezzatureNonPrenotate.remove(atrzToRemove);
-                    System.out.println("rimozione avvenutaAAAAA");
-                    System.out.println(a);
-                    //attrezzatureNonPrenotate.remove(atrzToRemove);
                 }
-            }
 
-        }
+
+
+                    if (checkOut.compareTo(dataPrenotazioneI) >= 0 && checkOut.compareTo(dataPrenotazioneO) < 0) {
+                        if (checkOut.compareTo(dataPrenotazioneI) == 0) {
+                            if (prenotazione.isCheckInAtMorning() && !checkOutAtMorning) {
+                                attrezzatureNonPrenotate.remove(atrzToRemove);
+
+                            }
+                        } else {
+                            attrezzatureNonPrenotate.remove(atrzToRemove);
+
+                        }
+                    }
+                }
         return attrezzatureNonPrenotate;
-    }
+        }
+
+
 
 public Attrezzatura selectAttrezzatura(int id){
       Attrezzatura attrezzatura = this.attrezzaturaRepository.findById(id);
