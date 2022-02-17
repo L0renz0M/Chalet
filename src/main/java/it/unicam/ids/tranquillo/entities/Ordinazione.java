@@ -10,13 +10,16 @@ public class Ordinazione {
     private boolean consegnato;
     private boolean completato;
     private int quantita;
+    private double prezzoTot;
+    private boolean pagato;
 
-
-    public Ordinazione (ProdottoBar prodottoBar,int quantita) {
+    public Ordinazione (ProdottoBar prodottoBar,int quantita, double prezzoTot) {
         this.consegnato=false;
         this.completato=false;
         this.prodottoBar=prodottoBar;
         this.quantita=quantita;
+        this.prezzoTot = prezzoTot;
+        this.pagato=false;
     }
 
 
@@ -30,6 +33,22 @@ public class Ordinazione {
 
     public void setNumeroOrdinazione(int numeroOrdinazione) {
         this.numeroOrdinazione = numeroOrdinazione;
+    }
+
+    public double getPrezzoTot() {
+        return prezzoTot;
+    }
+
+    public void setPrezzoTot(double prezzoTot) {
+        this.prezzoTot = prezzoTot;
+    }
+
+    public boolean isPagato() {
+        return pagato;
+    }
+
+    public void setPagato(boolean pagato) {
+        this.pagato = pagato;
     }
 
     public boolean isConsegnato() {
@@ -80,13 +99,15 @@ public class Ordinazione {
 
     @Override
     public String toString() {
-        return "Ordinazione{" +
-                "numeroOrdinazione=" + numeroOrdinazione +
-               "\n"+ ", consegnato=" + consegnato +
-                "\n"+ ", completato=" + completato +
-                "\n"+ ", quantita=" + quantita +
-                "\n"+ ", prodottoBar=" + prodottoBar +
-                "\n"+ ", cliente=" + cliente +
-                '}';
+        return          "\n" +"ORDINAZIONE" +
+                       " numeroOrdinazione= " + numeroOrdinazione +
+                "\n" + " consegnato= " + consegnato +
+                "\n" + " completato= " + completato +
+                "\n" + " quantita= " + quantita +
+                "\n" + " prodottoBar= " + prodottoBar +
+                "\n" + " cliente= " + cliente+
+                "\n" + "prezzoTotale= " + prezzoTot ;
     }
+
+
 }

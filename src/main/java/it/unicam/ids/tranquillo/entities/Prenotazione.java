@@ -104,13 +104,13 @@ public class Prenotazione {
 
     @Override
     public String toString() {
-        return  "\n"+ "numeroPrenotazione= " + numeroPrenotazione +
+        return              "\n"+"PRENOTAZIONE"+
+                      "numeroPrenotazione= " + numeroPrenotazione +
                 "\n"+ " checkIn= " + checkIn +
                 "\n"+ " checkOut= " + checkOut +
                 "\n"+ " checkInMattina= " + checkInAtMorning +
                 "\n"+ " checkOutMattina= " + checkOutAtMorning +
-                "\n"+ attrezzatura
-                ;
+                "\n"+ attrezzatura;
     }
 }
 

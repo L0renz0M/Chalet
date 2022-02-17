@@ -57,8 +57,9 @@ public class RiservazioneAttivita {
 
     @Override
     public String toString() {
-        return  "\n"+ " numeroRiservazione= " + numeroRiservazione +
-                "\n"+ " postiPrenotati= " + postiPrenotati +
-                "\n"+ " attivitaSportiva= " + attivitaSportiva ;
+        return          "\n" +"RISERVAZIONI ATTIVITA" +
+                       " numeroRiservazione= " + numeroRiservazione +
+                "\n" + " postiPrenotati= " + postiPrenotati +
+                "\n" + " attivitaSportiva= " + attivitaSportiva ;
     }
 }

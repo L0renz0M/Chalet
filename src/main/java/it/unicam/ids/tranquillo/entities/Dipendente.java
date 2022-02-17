@@ -57,9 +57,10 @@ public class Dipendente {
 
     @Override
     public String toString() {
-        return "id=" + id +
-                "\n " +", nome='" + nome +
-               "\n "+ " cognome=" + cognome +
-                "\n "+ " email=" + email ;
+        return      "\n" +"DIPENDENTE"+
+                       " id= " + id +
+                "\n" + " nome= " + nome +
+                "\n" + " cognome= " + cognome +
+                "\n" + " email= " + email ;
     }
 }

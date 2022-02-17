@@ -29,6 +29,8 @@ public class CliView {
     RiservazioneAttivitaService riservazioneAttivitaService;
     @Autowired
     AttivitaSportivaService attivitaSportivaService;
+    @Autowired
+    PagamentoService pagamentoService;
 
 
     public void start(){
@@ -43,6 +45,7 @@ public class CliView {
             "\n 2- per prenotare un prodotto del bar" +
             "\n 3- per prenotare un'attivita sportiva" +
             "\n 4- per ricapitolare le prorpie prenotazioni" +
+            "\n 5- per pagare le prenotaioni/oridnazioni"+
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
@@ -76,7 +79,7 @@ public class CliView {
                    System.out.println("Formato data non valido.");
                }
                if(checkinDate.compareTo(checkOutDate) == 0) {
-                   System.out.println("il checkin e il checkout corrispondono pernotare per tutta la giornata o solo per mezza ?");
+                   System.out.println("il checkin e il checkout corrispondono: prenotare per tutta la giornata o solo per mezza ?");
                    Scanner inputScelta = new Scanner(System.in);
                    String scelta = inputScelta.next();
                    if (scelta.startsWith("mezza")) {
@@ -123,8 +126,9 @@ public class CliView {
             System.out.println("inserisci la quantita per il prodotto  selezionato");
             Scanner qtaProd = new Scanner(System.in);
             int qta = qtaProd.nextInt();
-            this.ordinazioneService.createOrdinazioneProdotti(prodottoBar, qta);
-            System.out.println("\n" + "prodotto" + prodottoBar + "prenotato");
+            double prezzoTotale=qta*prodottoBar.getPrezzo();
+            this.ordinazioneService.createOrdinazioneProdotti(prodottoBar, qta, prezzoTotale);
+            System.out.println("\n" + "prodotto" + prodottoBar + " prenotato");
             System.out.println("proseguire con la prenotazione di un prodotto del bar?");
             Scanner inputBack= new Scanner(System.in);
             back = inputBack.next();
@@ -167,6 +171,11 @@ public class CliView {
             System.out.println(ordinazioniEffettuate);
             System.out.println(prenotazioniEffettuate);
             break;
+
+
+        case 5:
+            System.out.println("importo PRENOTAZIONI: "+"€"+this.pagamentoService.getImportoPrenotazioni());
+            System.out.println("importo ORDINAZIONI:  "+"€"+this.pagamentoService.getImportoOrdinazioni());
     }
     }
     while (a!=0);

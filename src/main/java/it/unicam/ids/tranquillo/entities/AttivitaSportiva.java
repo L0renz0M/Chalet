@@ -1,7 +1,5 @@
 package it.unicam.ids.tranquillo.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.w3c.dom.Text;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -67,11 +65,11 @@ public class AttivitaSportiva {
 
     @Override
     public String toString() {
-        return
-                "\n"+ "codiceAttivita=" + codiceAttivita +
-                 "\n"+ ", nomeAttvita='" + nomeAttvita +
-                 "\n"+", numeroPosti=" + numeroPosti +
-                 "\n"+ ", descrizione='" + descrizione +
-                "\n"+", dataOraAttiva='" + dataOraAttiva ;
+        return      "\n" +"ATTIVITA' SPORTIVA" +
+                       " numeroAttvita= " + codiceAttivita+
+                "\n" + " nomeAttvita= " + nomeAttvita +
+                "\n" + " numeroPosti= " + numeroPosti +
+                "\n" + " descrizione= " + descrizione +
+                "\n" + " dataOraAttiva= " + dataOraAttiva ;
     }
 }

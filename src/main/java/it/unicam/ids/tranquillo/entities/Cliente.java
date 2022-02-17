@@ -41,18 +41,18 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", email='" + email + '\'' +
-                ", prenotazione=" + prenotazione +
-                ", ordinazione=" + ordinazione +
-                '}';
+        return      "\n" +"CLIENTE" +
+                       " id= " + id +
+                "\n" + " nome= " + nome +
+                "\n" + " cognome= " + cognome +
+                "\n" + " email= " + email +
+                "\n" + " prenotazione= " + prenotazione +
+               "\n" + " ordinazione= " + ordinazione ;
     }
 
     @OneToOne
     private Prenotazione prenotazione;
+
 
     @OneToOne
     private Ordinazione ordinazione;

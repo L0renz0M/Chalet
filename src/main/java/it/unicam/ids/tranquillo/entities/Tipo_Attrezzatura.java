@@ -10,14 +10,12 @@ public class Tipo_Attrezzatura {
     @Id
     private String id;
     private String descrizione;
-    private String nome;
     private double prezzoBase;
 
 
-    public Tipo_Attrezzatura(String id, String descrizione, String nome, double prezzoBase) {
+    public Tipo_Attrezzatura(String id, String descrizione, double prezzoBase) {
         this.id = id;
         this.descrizione = descrizione;
-        this.nome = nome;
         this.prezzoBase = prezzoBase;
     }
 
@@ -41,14 +39,6 @@ public class Tipo_Attrezzatura {
         this.descrizione = descrizione;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public double getPrezzoBase() {
         return prezzoBase;
     }
@@ -59,11 +49,9 @@ public class Tipo_Attrezzatura {
 
     @Override
     public String toString() {
-        return
-                "" + id + '\'' +
-                "\n"+ "descrizione='" + descrizione + '\'' +
-                "\n"+ " nome='" + nome + '\'' +
-                "\n"+ " prezzoBase=" + prezzoBase +
-                '}';
+        return      "\n" +"TIPO ATTREZZATURA"+
+                       " id= " + id  +
+                "\n" + " descrizione= " + descrizione +
+                "\n" + " prezzoBase= " + prezzoBase;
     }
 }
