@@ -29,9 +29,8 @@ public class PagamentoService {
         int id = sessione.getCliente().getId();
         double importo =0.0;
         double countGiorni=0;
-        List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_Id(id);
+        List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_IdAndPagatoFalse(id);
         for(Prenotazione prenotazioni : listaPrenotazioniCliente){
-
             if(!prenotazioni.getCheckIn().equals(prenotazioni.getCheckOut())){
                 countGiorni=   prenotazioni.getCheckOut().getTime()-prenotazioni.getCheckIn().getTime();
                 TimeUnit time = TimeUnit.DAYS;
@@ -39,27 +38,43 @@ public class PagamentoService {
 
             }else if((prenotazioni.getCheckIn().equals(prenotazioni.getCheckOut()))&&(prenotazioni.isCheckInAtMorning()==true&&prenotazioni.isCheckOutAtMorning()==false) ) {
                 countGiorni=1;
-
             } else if ((prenotazioni.isCheckInAtMorning()&&prenotazioni.isCheckOutAtMorning()||(!prenotazioni.isCheckOutAtMorning()&&!prenotazioni.isCheckOutAtMorning()))){
                  countGiorni=0.5;
             }
-
-
          importo +=  prenotazioni.getAttrezzatura().getTipo_attrezzatura().getPrezzoBase()*countGiorni;
         }
         return importo;
+    }
+
+    public void setPrenotazioniPagate() {
+        SessioneService sessione = SessioneService.getInstance();
+        int id = sessione.getCliente().getId();
+        List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_IdAndPagatoFalse(id);
+        for (Prenotazione prenotazioni : listaPrenotazioniCliente) {
+            prenotazioni.setPagato(true);
+            this.prenotazioneRepository.save(prenotazioni);
+        }
     }
 
     public double getImportoOrdinazioni() {
         SessioneService sessione = SessioneService.getInstance();
         int id = sessione.getCliente().getId();
         double importo = 0.0;
-        List<Ordinazione> listaOrdinazioniCliente = this.ordinazioneRepository.findAllByCliente_Id(id);
+        List<Ordinazione> listaOrdinazioniCliente = this.ordinazioneRepository.findAllByCliente_IdAndPagatoFalse(id);
         for (Ordinazione ordinazione : listaOrdinazioniCliente) {
             importo += ordinazione.getProdottoBar().getPrezzo()*ordinazione.getQuantita();
         }
         return importo;
     }
 
+    public void setOrdinazioniPagate(){
+        SessioneService sessione = SessioneService.getInstance();
+        int id = sessione.getCliente().getId();
+        List<Ordinazione> listaOrdinazioniCliente = this.ordinazioneRepository.findAllByCliente_IdAndPagatoFalse(id);
+        for (Ordinazione ordinazione : listaOrdinazioniCliente) {
+            ordinazione.setPagato(true);
+            this.ordinazioneRepository.save(ordinazione);
+        }
+    }
 
 }

@@ -12,19 +12,11 @@ public class Prenotazione {
     @Id @GeneratedValue (strategy=GenerationType.TABLE) private int numeroPrenotazione;
     private Date checkIn;
     private Date checkOut;
-    boolean checkInAtMorning;
-    boolean checkOutAtMorning;
+    private boolean checkInAtMorning;
+    private boolean checkOutAtMorning;
+    private boolean pagato;
 
 
-/*
-    public Prenotazione(Attrezzatura attrezzatura,Date checkIn,Date checkOut) {
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-        this.attrezzatura = attrezzatura;
-        this.checkInAtMorning = true;
-        this.checkOutAtMorning = false;
-    }
-*/
 
     public Prenotazione( Date checkIn, Date checkOut, boolean checkInAtMorning, boolean checkOutAtMorning, Attrezzatura attrezzatura) {
         this.checkIn = checkIn;
@@ -32,6 +24,7 @@ public class Prenotazione {
         this.checkInAtMorning = checkInAtMorning;
         this.checkOutAtMorning = checkOutAtMorning;
         this.attrezzatura = attrezzatura;
+        this.pagato=false;
     }
 
     public Prenotazione() {
@@ -94,6 +87,14 @@ public class Prenotazione {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public boolean isPagato() {
+        return pagato;
+    }
+
+    public void setPagato(boolean pagato) {
+        this.pagato = pagato;
     }
 
     @ManyToOne

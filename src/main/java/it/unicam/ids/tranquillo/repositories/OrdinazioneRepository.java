@@ -10,5 +10,5 @@ public interface OrdinazioneRepository extends CrudRepository<Ordinazione, Integ
     Ordinazione findByNumeroOrdinazione(int numeroOrd);
     List<Ordinazione> findAllByCompletatoIsTrueAndAndConsegnatoIsFalse();
 
-    List<Ordinazione> findAllByCliente_Id(int id);
+    List<Ordinazione> findAllByCliente_IdAndPagatoFalse(int id);
 }

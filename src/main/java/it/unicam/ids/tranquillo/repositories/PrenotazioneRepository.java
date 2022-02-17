@@ -9,7 +9,7 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Int
 List<Prenotazione> findAll();
 
 
-    List<Prenotazione> findAllByCliente_Id(int id);
+    List<Prenotazione> findAllByCliente_IdAndPagatoFalse(int id);
 
 
 

@@ -134,7 +134,10 @@ public class CliView {
             back = inputBack.next();
 
                   }while(!back.startsWith("no"));
-    }
+            }else{System.out.println("Per poter ordinare prodotti al bar bisogna avere un ombrellone/parasole nella giornata odierna");
+
+            }
+
             break;
     
         case 3:
@@ -176,6 +179,33 @@ public class CliView {
         case 5:
             System.out.println("importo PRENOTAZIONI: "+"€"+this.pagamentoService.getImportoPrenotazioni());
             System.out.println("importo ORDINAZIONI:  "+"€"+this.pagamentoService.getImportoOrdinazioni());
+            double tot=0.0;
+            tot=this.pagamentoService.getImportoPrenotazioni()+this.pagamentoService.getImportoOrdinazioni();
+            System.out.println("L'importo totale da pagare è di :"+"€"+tot);
+            System.out.println("Per confermare il pagamento digitare [1]");
+            Scanner in = new Scanner(System.in);
+            int i=in.nextInt();
+            if(i==1) {
+                System.out.println("Inserire numero carta");
+                Scanner cartaIn=new Scanner(System.in);
+                String carta = cartaIn.next();
+                System.out.println("Inserire codice cvv");
+                Scanner cvvIn=new Scanner(System.in);
+                String cvv = cvvIn.next();
+                System.out.println("NUMERO CARTA: "+carta+"\n"
+                                    +"CVV: " +cvv+
+                                "\n"+"TOTALE: "+"€"+tot);
+                System.out.println("Premere [1] per confermare il pagamento");
+                Scanner confermaIn=new Scanner(System.in);
+                int conferma= confermaIn.nextInt();
+                if(conferma==1){
+                    System.out.println("PAGAMENTO CONFERMATO"+"\n"
+                    +"GRAZIE PER AVERCI SCELTO");
+                    this.pagamentoService.setOrdinazioniPagate();
+                    this.pagamentoService.setPrenotazioniPagate();
+                }
+            }
+            break;
     }
     }
     while (a!=0);

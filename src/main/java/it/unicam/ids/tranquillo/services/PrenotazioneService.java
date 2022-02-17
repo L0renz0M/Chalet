@@ -59,7 +59,7 @@ public class PrenotazioneService {
      public List<Prenotazione> getSommarioPrenot(){
          SessioneService sessione = SessioneService.getInstance();
          int id = sessione.getCliente().getId();
-         List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_Id(id);
+         List<Prenotazione> listaPrenotazioniCliente = this.prenotazioneRepository.findAllByCliente_IdAndPagatoFalse(id);
          return listaPrenotazioniCliente;
      }
 
