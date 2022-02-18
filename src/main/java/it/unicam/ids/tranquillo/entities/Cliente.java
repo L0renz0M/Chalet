@@ -45,9 +45,8 @@ public class Cliente {
                        " id= " + id +
                 "\n" + " nome= " + nome +
                 "\n" + " cognome= " + cognome +
-                "\n" + " email= " + email +
-                "\n" + " prenotazione= " + prenotazione +
-               "\n" + " ordinazione= " + ordinazione ;
+                "\n" + " email= " + email ;
+
     }
 
     @OneToOne

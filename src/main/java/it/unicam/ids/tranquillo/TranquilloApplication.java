@@ -61,7 +61,9 @@ public class TranquilloApplication implements CommandLineRunner {
 					break;
 				}
 			case 3:
+				if(userView.loginTitolare()==true){
 				userView.creazioneDip();
+				}
 				break;
 		}
 

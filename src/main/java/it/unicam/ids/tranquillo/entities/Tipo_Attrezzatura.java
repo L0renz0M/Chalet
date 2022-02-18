@@ -49,9 +49,9 @@ public class Tipo_Attrezzatura {
 
     @Override
     public String toString() {
-        return      "\n" +"TIPO ATTREZZATURA"+
-                       " id= " + id  +
-                "\n" + " descrizione= " + descrizione +
-                "\n" + " prezzoBase= " + prezzoBase;
+        return       "TIPO ATTREZZATURA"+
+                  " id= " + id  +
+                  " descrizione= " + descrizione +
+                  " prezzoBase= " + prezzoBase+"\n";
     }
 }

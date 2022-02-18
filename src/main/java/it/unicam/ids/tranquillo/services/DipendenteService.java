@@ -12,7 +12,6 @@ public class DipendenteService {
     DipendenteRepository dipendenteRepository;
 
     public void createDipendente(Dipendente dipendente){
-
         this.dipendenteRepository.save(dipendente);
     }
 

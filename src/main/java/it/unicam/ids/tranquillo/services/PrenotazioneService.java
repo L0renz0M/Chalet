@@ -9,10 +9,10 @@ import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Locale;
 
 @Component
 public class PrenotazioneService {
@@ -46,7 +46,7 @@ public class PrenotazioneService {
          if (prenotazione.getCliente().getId() != id) {
              continue;
          }
-         if (prenotazione.getCheckIn().compareTo(data) <= 0 && prenotazione.getCheckOut().compareTo(data) >= 0) {
+         if ( prenotazione.getCheckIn().compareTo(data) <= 0  && prenotazione.getCheckOut().compareTo(data) >= -1) {
              return true;
 
          }

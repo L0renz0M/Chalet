@@ -38,7 +38,7 @@ public class ProdottoBar {
     @Override
     public String toString() {
         return "\n"+"PRODOTTO BAR" +
-                "codiceP= " + codiceP +" NOME PRODOTTO= " + descrizione +  " PREZZO= " + prezzo+"\n" ;
+                " codiceP= " + codiceP +" NOME PRODOTTO= " + descrizione +  " PREZZO= " + prezzo+"\n" ;
     }
 
 

@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Ordinazione;
+import it.unicam.ids.tranquillo.entities.Tipo_Attrezzatura;
 import it.unicam.ids.tranquillo.services.AttivitaSportivaService;
 import it.unicam.ids.tranquillo.services.AttrezzaturaService;
 import it.unicam.ids.tranquillo.services.OrdinazioneService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 @Component
@@ -23,44 +25,18 @@ public class DipendentiView {
     OrdinazioneService ordinazioneService;
 
     public void caricamentoAttrezzaturaSpiaggia() {
-        int b;
-        do {
-            System.out.println("\n"+"seleziona azione da svolgere come dipendete" +
-                    "\n digita: " +
-                    "\n 1- per inserire un OMBRELLONE  " +
-                    "\n 2- per inserire una SDRAIA" +
-                    "\n 3- per inserire un PARASOLE " +
-                    "\n 4- per inserire un LETTINO" +
-                    "\n 0- per uscire dal menu");
-            Scanner in = new Scanner(System.in);
-            b = in.nextInt();
-            switch (b) {
-                case 1:
+        String id = null;
                     try {
-                        this.attrezzaturaService.createAttrezzatura("Ombrellone");
+                        List<Tipo_Attrezzatura> listaTipi = this.attrezzaturaService.getTipi();
+                        System.out.println(listaTipi);
+                        System.out.println("inserisci il tipo");
+                        Scanner idIn=new Scanner(System.in);
+                        id=idIn.next().toLowerCase(Locale.ROOT);
+                        this.attrezzaturaService.createAttrezzatura(id);
+                        System.out.println(id + " inserito");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Tipo non presente");
-                        break;
                     }
-                    System.out.println("Ombrellone inserito");
-                    break;
-
-                case 2:
-                    try {
-                        this.attrezzaturaService.createAttrezzatura("Sdraia");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Tipo non presente");
-                        break;
-                    }
-                    System.out.println("Sdraia inserito");
-                    break;
-
-                case 3:
-                    break;
-
-            }
-        }
-        while (b != 0);
     }
 
     public void start() {

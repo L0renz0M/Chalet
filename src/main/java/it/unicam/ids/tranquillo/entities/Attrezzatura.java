@@ -48,9 +48,8 @@ public class Attrezzatura {
     @Override
     public String toString() {
         return       "\n" +"ATTREZZATURA SPIAGGIA" +
-                       "id= "+ id +
-                "\n" + "tipo_attrezzatura= "+ tipo_attrezzatura +
-                "\n" + "prenotato= "+prenotato                ;
+                "\n" + "id= "+ id +
+                "\n" + tipo_attrezzatura+"\n";
     }
     @Override//cambiato il modo di confrontare l'attrezzatura
     public boolean equals(Object o){

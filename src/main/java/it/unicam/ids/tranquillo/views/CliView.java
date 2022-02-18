@@ -52,32 +52,38 @@ public class CliView {
     String back = null;
     boolean checkInAtMorning = true ;
     boolean checkOutAtMorning = false ;
+    Date checkinDate = null;
+    Date checkOutDate = null;
     switch (a){
         case 1:
            do {
-               System.out.println("Inserire le date per la prenotazione: checkin -- checkout [gg/mm/yyyy] :");
-               Date checkinDate =null;
-               Scanner checkinInp = new Scanner(System.in);
-               String checkin = checkinInp.next();
-               try{
-                   DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-                   //imposta che i calcoli di conversione della data siano rigorosi
-                   formatoData.setLenient(false);
-                   checkinDate = formatoData.parse(checkin);
-               } catch (ParseException e) {
-                   System.out.println("Formato data non valido.");
-               }
-               Date checkOutDate =null;
-               Scanner checkOutInp = new Scanner(System.in);
-               String checkout = checkOutInp.next();
-               try{
-                   DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-                   //imposta che i calcoli di conversione della data siano rigorosi
-                   formatoData.setLenient(false);
-                   checkOutDate = formatoData.parse(checkout);
-               } catch (ParseException e) {
-                   System.out.println("Formato data non valido.");
-               }
+               do {
+                   System.out.println("Inserire le date per la prenotazione: checkin -- checkout [gg/mm/yyyy] :");
+                   Scanner checkinInp = new Scanner(System.in);
+                   String checkin = checkinInp.next();
+                   try {
+                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                       //imposta che i calcoli di conversione della data siano rigorosi
+                       formatoData.setLenient(false);
+                       checkinDate = formatoData.parse(checkin);
+                   } catch (ParseException e) {
+                       System.out.println("Formato data non valido.");
+                   }
+                   Scanner checkOutInp = new Scanner(System.in);
+                   String checkout = checkOutInp.next();
+                   try {
+                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                       //imposta che i calcoli di conversione della data siano rigorosi
+                       formatoData.setLenient(false);
+                       checkOutDate = formatoData.parse(checkout);
+                   } catch (ParseException e) {
+                       System.out.println("Formato data non valido.");
+                   }
+                   if (checkinDate.compareTo(checkOutDate) > 0) {
+                       System.out.print("Errore! Data checkin successiva al checkout");
+                   }
+               }while(checkinDate.compareTo(checkOutDate)>0);
+
                if(checkinDate.compareTo(checkOutDate) == 0) {
                    System.out.println("il checkin e il checkout corrispondono: prenotare per tutta la giornata o solo per mezza ?");
                    Scanner inputScelta = new Scanner(System.in);
@@ -112,7 +118,7 @@ public class CliView {
                Scanner inputBack = new Scanner(System.in);
                back = inputBack.next();
 
-           }while(!back.startsWith("no"));
+           }while(!back.toLowerCase(Locale.ROOT).startsWith("no"));
             break;
         case 2:
             if(this.prenotazioneService.puoPrenotare()==true){
@@ -132,8 +138,7 @@ public class CliView {
             System.out.println("proseguire con la prenotazione di un prodotto del bar?");
             Scanner inputBack= new Scanner(System.in);
             back = inputBack.next();
-
-                  }while(!back.startsWith("no"));
+                  }while(!back.toLowerCase(Locale.ROOT).startsWith("no"));
             }else{System.out.println("Per poter ordinare prodotti al bar bisogna avere un ombrellone/parasole nella giornata odierna");
 
             }
@@ -160,7 +165,7 @@ public class CliView {
                 System.out.println("proseguire con la prenotazione di un'altra attivita?");
                 Scanner inputBack= new Scanner(System.in);
                 back = inputBack.next();
-            }while(!back.startsWith("no"));
+            }while(!back.toLowerCase(Locale.ROOT).startsWith("no"));
             break;
         case 4:
             sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
@@ -181,19 +186,36 @@ public class CliView {
             System.out.println("importo ORDINAZIONI:  "+"€"+this.pagamentoService.getImportoOrdinazioni());
             double tot=0.0;
             tot=this.pagamentoService.getImportoPrenotazioni()+this.pagamentoService.getImportoOrdinazioni();
+            if(tot==0){
+                System.out.println("\n"+"Carrello vuoto");
+                break;
+            }
             System.out.println("L'importo totale da pagare è di :"+"€"+tot);
             System.out.println("Per confermare il pagamento digitare [1]");
             Scanner in = new Scanner(System.in);
             int i=in.nextInt();
             if(i==1) {
-                System.out.println("Inserire numero carta");
-                Scanner cartaIn=new Scanner(System.in);
-                String carta = cartaIn.next();
-                System.out.println("Inserire codice cvv");
-                Scanner cvvIn=new Scanner(System.in);
-                String cvv = cvvIn.next();
-                System.out.println("NUMERO CARTA: "+carta+"\n"
-                                    +"CVV: " +cvv+
+                String carta;
+                String cvc;
+                do {
+                  System.out.println("Inserire numero carta");
+                  Scanner cartaIn = new Scanner(System.in);
+                  carta = cartaIn.next();
+                  if (carta.length() != 16) {
+                      System.out.println("Errore inserimento numero carta");
+                  }
+              }while (carta.length()!=16);
+
+                do {
+                    System.out.println("Inserire codice cvv");
+                    Scanner cvcIn = new Scanner(System.in);
+                    cvc = cvcIn.next();
+                    if ((cvc.length() != 3)) {
+                        System.out.println("Errore inserimento codice sicurezza");
+                    }
+                }while(cvc.length()!=3);
+                    System.out.println("NUMERO CARTA: "+carta+"\n"
+                                    +"CVV: " +cvc+
                                 "\n"+"TOTALE: "+"€"+tot);
                 System.out.println("Premere [1] per confermare il pagamento");
                 Scanner confermaIn=new Scanner(System.in);

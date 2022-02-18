@@ -104,8 +104,8 @@ public class Ordinazione {
                 "\n" + " consegnato= " + consegnato +
                 "\n" + " completato= " + completato +
                 "\n" + " quantita= " + quantita +
-                "\n" + " prodottoBar= " + prodottoBar +
-                "\n" + " cliente= " + cliente+
+                "\n" +   prodottoBar +
+                "\n" +   cliente+
                 "\n" + "prezzoTotale= " + prezzoTot ;
     }
 

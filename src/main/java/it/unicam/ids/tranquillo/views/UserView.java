@@ -115,7 +115,7 @@ public void creazioneDip(){
     Scanner passInp = new Scanner(System.in);
     String pass = passInp.next();
     if(this.registerUserService.checkCredenzialiDipendenti(email,pass)==false) {
-        System.out.println("LE CREDENZIALI INSERITE NON CORRISPONDONO ALLE PREDEFINITE");
+        System.out.println("\n"+"LE CREDENZIALI INSERITE NON CORRISPONDONO ALLE PREDEFINITE");
     }
     else{
     System.out.println("\n"+"INSERISCI I TUOI DATI: ");
@@ -133,5 +133,20 @@ public void creazioneDip(){
 }
 }
 
+public boolean loginTitolare(){
+    System.out.println("ACCESSO CONSENTITO SOLO CON CREDENZIALI AMMINISTRATORE");
+    System.out.println("Inserisci email: ");
+    Scanner emailIn=new Scanner(System.in);
+    String email=emailIn.next();
+    System.out.println("Inserisci password: ");
+    Scanner passIn=new Scanner(System.in);
+    String pass=passIn.next();
+    if(email.equals("titolare@chalet.it")&&pass.equals("titolare1")){
+        System.out.println("login avveenuto con successo");
+        System.out.print("BENVENUTO AMMINISTRATORE"+"\n");
+        return true;
+    }
+return false;
+}
 
 }
