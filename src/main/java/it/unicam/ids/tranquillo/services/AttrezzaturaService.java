@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
+
 
 @Service
 public class AttrezzaturaService {

@@ -38,7 +38,7 @@ public class PagamentoService {
 
             }else if((prenotazioni.getCheckIn().equals(prenotazioni.getCheckOut()))&&(prenotazioni.isCheckInAtMorning()==true&&prenotazioni.isCheckOutAtMorning()==false) ) {
                 countGiorni=1;
-            } else if ((prenotazioni.isCheckInAtMorning()&&prenotazioni.isCheckOutAtMorning()||(!prenotazioni.isCheckOutAtMorning()&&!prenotazioni.isCheckOutAtMorning()))){
+            } else if ((prenotazioni.isCheckInAtMorning()==true && prenotazioni.isCheckOutAtMorning()==true||(prenotazioni.isCheckOutAtMorning()==false && prenotazioni.isCheckOutAtMorning()==false))){
                  countGiorni=0.5;
             }
          importo +=  prenotazioni.getAttrezzatura().getTipo_attrezzatura().getPrezzoBase()*countGiorni;

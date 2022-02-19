@@ -9,10 +9,9 @@ import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 @Component
 public class PrenotazioneService {

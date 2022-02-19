@@ -1,6 +1,7 @@
 package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Ordinazione;
+import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.entities.Tipo_Attrezzatura;
 import it.unicam.ids.tranquillo.services.AttivitaSportivaService;
 import it.unicam.ids.tranquillo.services.AttrezzaturaService;
@@ -48,6 +49,7 @@ public class DipendentiView {
                     "\n 2- per CREARE ATTIVITA' SPORTIVA" +
                     "\n 3- per GESTIRE ORDINAZIONI BAR CLIENTI " +
                     "\n 4- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
+                    "\n 5- per VISUALIZZARE LE PRENOTAZIONI"+
                     "\n 0- per uscire dal menu");
             Scanner in = new Scanner(System.in);
             b = in.nextInt();
@@ -62,6 +64,9 @@ public class DipendentiView {
                 case 3:
                     List<Ordinazione> ordinazioneList=this.ordinazioneService.getListaOrdinazioni();
                     System.out.println("Elenco ordinazioni da eseguire:"+ordinazioneList);
+                    if(ordinazioneList.size()==0){
+                        break;
+                    }
                     System.out.println("selezionare ordinazione da eseguire");
                     Scanner numOrdInp= new Scanner(System.in);
                     int numeroOrd= numOrdInp.nextInt();
@@ -70,10 +75,18 @@ public class DipendentiView {
                 case 4:
                     List<Ordinazione> ordinazioniCompletate = this.ordinazioneService.getListaOrdinazioniConsegnare();
                     System.out.println("Elenco ordinazioni pronte per essere consegnate:"+ordinazioniCompletate);
+                    if(ordinazioniCompletate.size()==0){
+                        break;
+                    }
                     System.out.println("selezionare ordinazione da consegnare");
                     numOrdInp= new Scanner(System.in);
                     numeroOrd= numOrdInp.nextInt();
                     this.ordinazioneService.consegnaOrdinazione(numeroOrd);
+                    break;
+
+                case 5:
+                    List<Prenotazione>elencoPrenotazioniClienti = this.prenotazioneService.getListaPrenotazioni();
+                    System.out.println("Elenco prenotazioni effettuate"+"\n" +elencoPrenotazioniClienti);
                     break;
             }
     }while (b != 0);

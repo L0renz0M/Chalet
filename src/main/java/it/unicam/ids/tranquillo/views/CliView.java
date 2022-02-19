@@ -54,6 +54,7 @@ public class CliView {
     boolean checkOutAtMorning = false ;
     Date checkinDate = null;
     Date checkOutDate = null;
+    Date data=new Date();
     switch (a){
         case 1:
            do {
@@ -66,6 +67,7 @@ public class CliView {
                        //imposta che i calcoli di conversione della data siano rigorosi
                        formatoData.setLenient(false);
                        checkinDate = formatoData.parse(checkin);
+
                    } catch (ParseException e) {
                        System.out.println("Formato data non valido.");
                    }
@@ -82,7 +84,11 @@ public class CliView {
                    if (checkinDate.compareTo(checkOutDate) > 0) {
                        System.out.print("Errore! Data checkin successiva al checkout");
                    }
-               }while(checkinDate.compareTo(checkOutDate)>0);
+                   if (checkinDate.compareTo(data)<0){
+                       System.out.print("Errore! La data del checkin deve essere uguale o maggiore alla data odierna"+"\n");
+
+                   }
+            }while(checkinDate.compareTo(checkOutDate)>0 || checkinDate.compareTo(data)<0);
 
                if(checkinDate.compareTo(checkOutDate) == 0) {
                    System.out.println("il checkin e il checkout corrispondono: prenotare per tutta la giornata o solo per mezza ?");
@@ -146,6 +152,7 @@ public class CliView {
             break;
     
         case 3:
+            if(this.prenotazioneService.puoPrenotare()==true){
             do{
                 List<AttivitaSportiva> listaAttivitaSportiva = this.attivitaSportivaService.getAttivitaSportiva();
                 System.out.println("Lista attivita sportive disponibili" + "\n" + listaAttivitaSportiva);
@@ -166,6 +173,9 @@ public class CliView {
                 Scanner inputBack= new Scanner(System.in);
                 back = inputBack.next();
             }while(!back.toLowerCase(Locale.ROOT).startsWith("no"));
+            }else {
+                System.out.println("Per potersi iscrivere ad un'attività sportiva bisogna avere un ombrellone/parasole nella giornata odierna");
+            }
             break;
         case 4:
             sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE

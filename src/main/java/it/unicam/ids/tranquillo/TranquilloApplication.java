@@ -37,7 +37,7 @@ public class TranquilloApplication implements CommandLineRunner {
 		System.out.println("SCEGLIERE :" +
 				"\n" + "1- PER EFFETTUARE IL LOGIN" +
 				"\n" + "2- PER EFFETTUARE LA REGISTRAZIONE"+
-				"\n"+"3- PER AGGIUNGERE PROFILO DIPENDENTE");
+				"\n" + "3- PER GESTIONE PROFILI DIPENDENTE");
 		Scanner inp = new Scanner(System.in);
 		int a = inp.nextInt();
 		switch (a) {
