@@ -2,13 +2,19 @@ package it.unicam.ids.tranquillo.services;
 
 import it.unicam.ids.tranquillo.entities.AttivitaSportiva;
 import it.unicam.ids.tranquillo.entities.Ordinazione;
+import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.entities.RiservazioneAttivita;
 import it.unicam.ids.tranquillo.repositories.AttivitaSportivaRepository;
+import it.unicam.ids.tranquillo.repositories.PrenotazioneRepository;
 import it.unicam.ids.tranquillo.repositories.RiservazioneAttivitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -17,6 +23,8 @@ public class RiservazioneAttivitaService {
     RiservazioneAttivitaRepository riservazioneAttivitaRepository;
     @Autowired
     AttivitaSportivaRepository attivitaSportivaRepository;
+    @Autowired
+    PrenotazioneRepository prenotazioneRepository;
 
     public void createRiservazioneAttivita(AttivitaSportiva attivitaSportiva, int posti){
         if(attivitaSportiva.getNumeroPosti() < posti){
@@ -39,6 +47,7 @@ public class RiservazioneAttivitaService {
         List<RiservazioneAttivita> listaRiservazioniCliente = this.riservazioneAttivitaRepository.findAllByCliente_Id(id);
         return listaRiservazioniCliente;
     }
+
 
 
 

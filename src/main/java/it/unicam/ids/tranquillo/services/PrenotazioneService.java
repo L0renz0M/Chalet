@@ -9,6 +9,9 @@ import it.unicam.ids.tranquillo.repositories.Tipo_AttrezzaturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -36,16 +39,21 @@ public class PrenotazioneService {
         return this.prenotazioneRepository.findAll();
     }
 
- public boolean puoPrenotare(){
+ public boolean puoPrenotare() throws ParseException {
      SessioneService sessione = SessioneService.getInstance();
      int id = sessione.getCliente().getId();
+
+     DateFormat formatoDataNow = new SimpleDateFormat("dd/MM/yyyy");
      Date data = new Date();
+     Date dataSenzaOra=formatoDataNow.parse(formatoDataNow.format(data));
+
+
      List<Prenotazione> listaPrenotazioni = this.prenotazioneRepository.findAll();
      for (Prenotazione prenotazione : listaPrenotazioni) {
          if (prenotazione.getCliente().getId() != id) {
              continue;
          }
-         if ( prenotazione.getCheckIn().compareTo(data) <= 0  && prenotazione.getCheckOut().compareTo(data) >= -1) {
+         if ( prenotazione.getCheckIn().compareTo(dataSenzaOra) <= 0  && prenotazione.getCheckOut().compareTo(dataSenzaOra) >=0) {
              return true;
 
          }

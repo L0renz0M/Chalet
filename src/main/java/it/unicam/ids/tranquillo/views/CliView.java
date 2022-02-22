@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -33,7 +34,7 @@ public class CliView {
     PagamentoService pagamentoService;
 
 
-    public void start(){
+    public void start() throws ParseException {
       int a;
     do{
         SessioneService sessione = SessioneService.getInstance(); //CI DA UN' ISTANZA SESSIONE SU CUI LAVORARE
@@ -54,7 +55,13 @@ public class CliView {
     boolean checkOutAtMorning = false ;
     Date checkinDate = null;
     Date checkOutDate = null;
-    Date data=new Date();
+
+    DateFormat formatoDataNow = new SimpleDateFormat("dd/MM/yyyy");
+    Date data = new Date();
+    Date dataSenzaOra=formatoDataNow.parse(formatoDataNow.format(data));
+
+
+    int y;
     switch (a){
         case 1:
            do {
@@ -63,8 +70,7 @@ public class CliView {
                    Scanner checkinInp = new Scanner(System.in);
                    String checkin = checkinInp.next();
                    try {
-                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-                       //imposta che i calcoli di conversione della data siano rigorosi
+                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT);
                        formatoData.setLenient(false);
                        checkinDate = formatoData.parse(checkin);
 
@@ -74,7 +80,7 @@ public class CliView {
                    Scanner checkOutInp = new Scanner(System.in);
                    String checkout = checkOutInp.next();
                    try {
-                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                       DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT);
                        //imposta che i calcoli di conversione della data siano rigorosi
                        formatoData.setLenient(false);
                        checkOutDate = formatoData.parse(checkout);
@@ -83,12 +89,15 @@ public class CliView {
                    }
                    if (checkinDate.compareTo(checkOutDate) > 0) {
                        System.out.print("Errore! Data checkin successiva al checkout");
+                       y=0;
                    }
-                   if (checkinDate.compareTo(data)<-1){
+                   else if (checkinDate.compareTo(dataSenzaOra)<0){
                        System.out.print("Errore! La data del checkin deve essere uguale o maggiore alla data odierna"+"\n");
-
+                       y=0;
+                   }else {
+                       y=1;
                    }
-            }while(checkinDate.compareTo(checkOutDate)>0 || checkinDate.compareTo(data)<-1);
+            }while(y==0);
 
                if(checkinDate.compareTo(checkOutDate) == 0) {
                    System.out.println("il checkin e il checkout corrispondono: prenotare per tutta la giornata o solo per mezza ?");

@@ -60,7 +60,7 @@ public class AttivitaSportivaService {
     public List<AttivitaSportiva> getAttivitaSportiva(){
         List<AttivitaSportiva> attivita= new ArrayList<>();
         this.attivitaSportivaRepository.findAll().forEach((attivitaSportiva -> {
-            if(attivitaSportiva.getNumeroPosti()>0){
+            if(attivitaSportiva.getNumeroPosti()>0  ){
                 attivita.add(attivitaSportiva);
             }
         }));
