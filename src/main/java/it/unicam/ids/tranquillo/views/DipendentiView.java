@@ -2,11 +2,9 @@ package it.unicam.ids.tranquillo.views;
 
 import it.unicam.ids.tranquillo.entities.Ordinazione;
 import it.unicam.ids.tranquillo.entities.Prenotazione;
+import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.entities.Tipo_Attrezzatura;
-import it.unicam.ids.tranquillo.services.AttivitaSportivaService;
-import it.unicam.ids.tranquillo.services.AttrezzaturaService;
-import it.unicam.ids.tranquillo.services.OrdinazioneService;
-import it.unicam.ids.tranquillo.services.PrenotazioneService;
+import it.unicam.ids.tranquillo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +22,9 @@ public class DipendentiView {
     AttivitaSportivaService attivitaSportivaService;
     @Autowired
     OrdinazioneService ordinazioneService;
+    @Autowired
+    ProdottoBarService prodottoBarService;
+
 
     public void caricamentoAttrezzaturaSpiaggia() {
         String id = null;
@@ -40,16 +41,32 @@ public class DipendentiView {
                     }
     }
 
+    public void caricamentoProdottiBar() {
+
+        String descr = null;
+        Double prezzo = null;
+            System.out.println("inserisci la descrizione del prodotto");
+            Scanner descrizione = new Scanner(System.in);
+            descr = descrizione.next();
+            System.out.println("inserisci il prezzo del prodotto");
+            Scanner prezzoProdotto = new Scanner(System.in);
+            prezzo = Double.valueOf(prezzoProdotto.next());
+            this.prodottoBarService.createProdottoBar(descr,prezzo);
+            System.out.println("Prodotto inserito");
+
+    }
+
     public void start() {
         int b;
         do {
             System.out.println("\n"+"Seleziona azione da svolgere come dipendente" +
                     "\n digita: " +
                     "\n 1- per INSERIRE ATTREZZATURA SPIAGGIA " +
-                    "\n 2- per CREARE ATTIVITA' SPORTIVA" +
-                    "\n 3- per GESTIRE ORDINAZIONI BAR CLIENTI " +
-                    "\n 4- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
-                    "\n 5- per VISUALIZZARE LE PRENOTAZIONI"+
+                    "\n 2- per INSERIRE UN PRODOTTO BAR " +
+                    "\n 3- per CREARE ATTIVITA' SPORTIVA" +
+                    "\n 4- per GESTIRE ORDINAZIONI BAR CLIENTI " +
+                    "\n 5- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
+                    "\n 6- per VISUALIZZARE LE PRENOTAZIONI"+
                     "\n 0- per uscire dal menu");
             Scanner in = new Scanner(System.in);
             b = in.nextInt();
@@ -58,10 +75,14 @@ public class DipendentiView {
                     caricamentoAttrezzaturaSpiaggia();
                     break;
                 case 2:
-                    this.attivitaSportivaService.createAttivitaSportiva();
+                    caricamentoProdottiBar();
                     break;
 
                 case 3:
+                    this.attivitaSportivaService.createAttivitaSportiva();
+                    break;
+
+                case 4:
                     List<Ordinazione> ordinazioneList=this.ordinazioneService.getListaOrdinazioni();
                     System.out.println("Elenco ordinazioni da eseguire:"+ordinazioneList);
                     if(ordinazioneList.size()==0){
@@ -72,7 +93,7 @@ public class DipendentiView {
                     int numeroOrd= numOrdInp.nextInt();
                     this.ordinazioneService.selectOrdinazione(numeroOrd);
                     break;
-                case 4:
+                case 5:
                     List<Ordinazione> ordinazioniCompletate = this.ordinazioneService.getListaOrdinazioniConsegnare();
                     System.out.println("Elenco ordinazioni pronte per essere consegnate:"+ordinazioniCompletate);
                     if(ordinazioniCompletate.size()==0){
@@ -84,10 +105,14 @@ public class DipendentiView {
                     this.ordinazioneService.consegnaOrdinazione(numeroOrd);
                     break;
 
-                case 5:
+                case 6:
                     List<Prenotazione>elencoPrenotazioniClienti = this.prenotazioneService.getListaPrenotazioni();
                     System.out.println("Elenco prenotazioni effettuate"+"\n" +elencoPrenotazioniClienti);
                     break;
+                case 7:
+
+                    break;
+
             }
     }while (b != 0);
 

@@ -38,4 +38,8 @@ public class ProdottoBarService {
         return prodottoBar;
     }
 
+    public void createProdottoBar(String descr, Double prezzo) {
+        ProdottoBar prodottoBar = new ProdottoBar(descr,prezzo);
+        this.prodottoBarRepository.save(prodottoBar);
+    }
 }

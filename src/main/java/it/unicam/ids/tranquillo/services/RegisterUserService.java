@@ -57,11 +57,24 @@ public class RegisterUserService {
         if ((em.equals("dipendenti@chalet.com") || em.equals("dipendenti@chalet.it"))&& pass.equals("dipendente1")){
             System.out.print("LOGIN DIPENDENTE AVVENUTO  CON SUCCESSO");
                 return true;
-            }else{
-            System.out.print("LOGIN NON AVVENUTO CREDENZIALI DIPENDENTE ERRATE");
+        }else{
+            System.out.print("LOGIN NON AVVENUTO, CREDENZIALI DIPENDENTE ERRATE");
             return false;
         }
     }
+
+
+
+
+    /*public boolean checkCredenzialiTitolare(String em, String pass) {
+        if(em.equals("titolare@chalet.it") && pass.equals("titolare1")){
+            System.out.print("LOGIN TITOLARE AVVENUTO CON SUCCESSO");
+            return true;
+        }else{
+            System.out.print("LOGIN NON AVVENUTO, CREDENZIALI TITOLARE ERRATE");
+            return false;
+        }
+    }*/
 
 
 }

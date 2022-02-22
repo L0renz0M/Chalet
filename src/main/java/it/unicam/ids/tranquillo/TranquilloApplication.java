@@ -35,9 +35,9 @@ public class TranquilloApplication implements CommandLineRunner {
 		System.out.println("\n" + "BENEVENUTO NELLO CHALET 'TRANQUILLO' " + "\n" +
 				"DA QUI POTRAI REGISTRARTI AI NOSTRI SERVIZI O ACCEDERVI SE SI E' GIA REGISTRATI:");
 		System.out.println("SCEGLIERE :" +
-				"\n" + "1- PER EFFETTUARE IL LOGIN" +
-				"\n" + "2- PER EFFETTUARE LA REGISTRAZIONE"+
-				"\n" + "3- PER GESTIONE PROFILI DIPENDENTE");
+				"\n" + "1- PER EFFETTUARE IL LOGIN COME CLIENTE O COME DIPENDENTE" +
+				"\n" + "2- PER EFFETTUARE LA REGISTRAZIONE" +
+				"\n" + "3- PER EFFETUARE IL LOGIN COME TITOLARE");
 		Scanner inp = new Scanner(System.in);
 		int a = inp.nextInt();
 		switch (a) {
@@ -55,19 +55,43 @@ public class TranquilloApplication implements CommandLineRunner {
 				if (userView.registrazione() == true) {
 					if (userView.login() == 1) {
 						cliView.start();
-					} else if (userView.login()== 2){
+					} else if (userView.login() == 2) {
 						dipendentiView.start();
+					} else if (userView.login() == 3)
+						break;
+				}
+
+			case 3:
+				if (userView.loginTitolare() == true) {
+					System.out.println("\n" + "LOGIN TITOLARE AVVENUTO CON SUCCESSO' ");
+					System.out.println("SCEGLIERE :" +
+							"\n" + "1- PER AGGIUNGERE UN DIPENDENTE AL SISTEMA" +
+							"\n" + "2- PER SVOLGERE NORMALI MANSIONI");
+					Scanner inb = new Scanner(System.in);
+					int b = inp.nextInt();
+					switch (b) {
+						case 1:
+							userView.creazioneDip();
+							System.out.println("DIGITA 1 PER PASSARE AL MENU DIPENDENTI, ALTRIMENTI 0 PER USCIRE");
+							Scanner inpu = new Scanner(System.in);
+							int c = inpu.nextInt();
+							if (c == 1) {
+								dipendentiView.start();
+
+							}else{
+								break;
+							}
+							break;
+						case 2:
+							dipendentiView.start();
+							break;
 					}
 					break;
+
 				}
-			case 3:
-				if(userView.loginTitolare()==true){
-				userView.creazioneDip();
-				}
-				break;
-		}
 
 		}
 
 	}
 
+}

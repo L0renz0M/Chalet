@@ -30,23 +30,31 @@ public class AttivitaSportivaService {
         System.out.println("\n"+"INSERIRE DESCRIZIONE PER L' ATTIVITA");
         Scanner descrIn = new Scanner (System.in);
         String descr= descrIn.next();
-
-
+        Date dataNow = new Date();
+        Date dataD = null;
+        do{
         System.out.println("\n"+"INSERIRE LA DATA DI SVOLGIMENTO DELL' ATTIVITA [gg/mm/yyyy]");
-        Date dataD=null ;
-        Scanner dateIn = new Scanner (System.in);
-        String data= dateIn.next();
-        try{
-            DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
-            //imposta che i calcoli di conversione della data siano rigorosi
-            formatoData.setLenient(false);
-            dataD = formatoData.parse(data);
-        } catch (ParseException e) {
-            System.out.println("Formato data non valido.");
-        }
+            Scanner dateIn = new Scanner(System.in);
+            String data = dateIn.next();
+            try {
+                DateFormat formatoData = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+                //imposta che i calcoli di conversione della data siano rigorosi
+                formatoData.setLenient(false);
+                dataD = formatoData.parse(data);
+                if (dataD.compareTo(dataNow) < -1) {
+                    System.out.print("Errore! Non si può creare una attività sportiva per una data antecedente a quella odierna");
+
+                }
+
+            } catch (ParseException e) {
+                System.out.println("Formato data non valido.");
+            }
+
+        } while (dataD.compareTo(dataNow) < -1);
 
         AttivitaSportiva attivita = new AttivitaSportiva(nome,num,descr,dataD);
         this.attivitaSportivaRepository.save(attivita);
+        System.out.println("Attivita: "+nome+ " aggiunta");
     }
 
     public List<AttivitaSportiva> getAttivitaSportiva(){

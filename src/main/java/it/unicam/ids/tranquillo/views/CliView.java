@@ -44,8 +44,8 @@ public class CliView {
             "\n 1- per prenotare un'attrezzatura " +
             "\n 2- per prenotare un prodotto del bar" +
             "\n 3- per prenotare un'attivita sportiva" +
-            "\n 4- per ricapitolare le prorpie prenotazioni" +
-            "\n 5- per pagare le prenotaioni/oridnazioni"+
+            "\n 4- per ricapitolare le proprie prenotazioni" +
+            "\n 5- per pagare le prenotazioni/ordinazioni"+
             "\n 0- per uscire dal menu");
     Scanner input= new Scanner(System.in);
     a = input.nextInt();
@@ -84,11 +84,11 @@ public class CliView {
                    if (checkinDate.compareTo(checkOutDate) > 0) {
                        System.out.print("Errore! Data checkin successiva al checkout");
                    }
-                   if (checkinDate.compareTo(data)<0){
+                   if (checkinDate.compareTo(data)<-1){
                        System.out.print("Errore! La data del checkin deve essere uguale o maggiore alla data odierna"+"\n");
 
                    }
-            }while(checkinDate.compareTo(checkOutDate)>0 || checkinDate.compareTo(data)<0);
+            }while(checkinDate.compareTo(checkOutDate)>0 || checkinDate.compareTo(data)<-1);
 
                if(checkinDate.compareTo(checkOutDate) == 0) {
                    System.out.println("il checkin e il checkout corrispondono: prenotare per tutta la giornata o solo per mezza ?");
@@ -247,12 +247,3 @@ public class CliView {
 
 }
 
-//aggiunta attrezzatura da parte del titolare
- /*try {
-         this.attrezzaturaService.createAttrezzatura("Ombrellone");
-         } catch (IllegalArgumentException e) {
-         System.out.println("Tipo non presente");
-         break;
-         }
-         System.out.println("Ombrellone inserito");
-         break;*/

@@ -54,4 +54,7 @@ public class Tipo_Attrezzatura {
                   " descrizione= " + descrizione +
                   " prezzoBase= " + prezzoBase+"\n";
     }
+
+
+
 }

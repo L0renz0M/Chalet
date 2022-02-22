@@ -11,7 +11,7 @@ public class AttivitaSportiva {
     private String nomeAttvita;
     private int numeroPosti;
     private String descrizione;
-    private Date dataOraAttiva;
+    private Date dataOraAttivita;
 
 
     public AttivitaSportiva() { }
@@ -20,7 +20,7 @@ public class AttivitaSportiva {
         this.nomeAttvita = nomeAttvita;
         this.numeroPosti = numeroPosti;
         this.descrizione = descrizione;
-        this.dataOraAttiva = dataOraAttiva;
+        this.dataOraAttivita = dataOraAttiva;
     }
 
     public int getCodiceAttivita() {
@@ -55,12 +55,12 @@ public class AttivitaSportiva {
         this.descrizione = descrizione;
     }
 
-    public Date getDataOraAttiva() {
-        return dataOraAttiva;
+    public Date getDataOraAttivita() {
+        return dataOraAttivita;
     }
 
-    public void setDataOraAttiva(Date dataOraAttiva) {
-        this.dataOraAttiva = dataOraAttiva;
+    public void setDataOraAttivita(Date dataOraAttiva) {
+        this.dataOraAttivita = dataOraAttiva;
     }
 
     @Override
@@ -70,6 +70,6 @@ public class AttivitaSportiva {
                 "\n" + " nomeAttvita= " + nomeAttvita +
                 "\n" + " numeroPosti= " + numeroPosti +
                 "\n" + " descrizione= " + descrizione +
-                "\n" + " dataOraAttiva= " + dataOraAttiva ;
+                "\n" + " dataOraAttiva= " + dataOraAttivita;
     }
 }

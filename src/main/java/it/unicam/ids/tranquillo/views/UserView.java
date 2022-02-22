@@ -6,11 +6,13 @@ import it.unicam.ids.tranquillo.entities.RegisterUser;
 import it.unicam.ids.tranquillo.repositories.ClienteRepository;
 import it.unicam.ids.tranquillo.repositories.DipendenteRepository;
 import it.unicam.ids.tranquillo.repositories.RegisterUserRepository;
+import it.unicam.ids.tranquillo.services.DipendenteService;
 import it.unicam.ids.tranquillo.services.RegisterUserService;
 import it.unicam.ids.tranquillo.services.SessioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Scanner;
 
 @Component
@@ -24,14 +26,17 @@ public class UserView {
     ClienteRepository clienteRepository;
     @Autowired
     DipendenteRepository dipendenteRepository;
+    @Autowired
+    DipendenteService dipendenteService;
 
     public int login() {
         int c;
         while (true) {
             System.out.println("\n" + "BENEVENUTO NELLO CHALET 'TRANQUILLO'" +
                     "\n" + "-->PER USUFRUIRE DEI SERVIZI OFFERTI IDENTIFICARSI" +
-                    "\n\n" + "1-->PER IDENTIFICARSI COME CLIENTI " +
-                    "\n" + "2-->PER IDENTIFICARSI COME DIPENDENTI");
+                    "\n\n" + "1-->PER IDENTIFICARSI COME CLIENTE " +
+                    "\n" + "2-->PER IDENTIFICARSI COME DIPENDENTE"
+                    );
             Scanner inpRuolo = new Scanner(System.in);
             int ruolo = inpRuolo.nextInt();
 
@@ -53,20 +58,22 @@ public class UserView {
                     System.out.println("\n"+"LOGIN ERRATO");
                     continue;
                 }
+            }else {
+                System.out.println("LOGIN DIPENDENTE");
+                System.out.println("inserisci email:");
+                Scanner emailInp = new Scanner(System.in);
+                String em = emailInp.next();
+                System.out.println("inserisci password:");
+                Scanner passInp = new Scanner(System.in);
+                String pass = passInp.next();
+                if (this.registerUserService.checkCredenzialiDipendenti(em, pass) == true) {
+                    return 2;//dipendente
+                } else {
+                    System.out.println("\n" + "login DIPENDENTE errato");
+                    continue;
+                }
             }
-            System.out.println("LOGIN DIPENDENTE");
-            System.out.println("inserisci email:");
-            Scanner emailInp = new Scanner(System.in);
-            String em = emailInp.next();
-            System.out.println("inserisci password:");
-            Scanner passInp = new Scanner(System.in);
-            String pass = passInp.next();
-            if(this.registerUserService.checkCredenzialiDipendenti(em,pass)==true) {
-                return 2;//dipendente
-            }else{
-                System.out.println("\n"+"login DIPENDENTE errato");
-                continue;
-            }
+
         }
     }
     public boolean registrazione() {
@@ -107,18 +114,10 @@ public class UserView {
         return true;
     }
 
-public void creazioneDip(){
-    System.out.println("INSERISCI LA MAIL PREDEFINITA PER I DIPENDENTI: ");
-    Scanner emInp = new Scanner(System.in);
-    String email = emInp.next();
-    System.out.println("\n"+"INSERISCI LA PASSSWORD PREDEFINITA PER LA REGISTRAZIONE: ");
-    Scanner passInp = new Scanner(System.in);
-    String pass = passInp.next();
-    if(this.registerUserService.checkCredenzialiDipendenti(email,pass)==false) {
-        System.out.println("\n"+"LE CREDENZIALI INSERITE NON CORRISPONDONO ALLE PREDEFINITE");
-    }
-    else{
-    System.out.println("\n"+"INSERISCI I TUOI DATI: ");
+
+public void creazioneDip() {
+
+    System.out.println("\n"+"INSERISCI I DATI DEL DIPENDENTE: ");
     System.out.println("\n"+"INSERISCI NOME: ");
     Scanner nomeInp = new Scanner(System.in);
     String nome= nomeInp.next();
@@ -127,26 +126,40 @@ public void creazioneDip(){
     String cognome= cognomeInp.next();
     Dipendente dipendente = new Dipendente(nome,cognome);
     this.dipendenteRepository.save(dipendente);
-    this.registerUserService.createdip(email, pass, dipendente);
-    System.out.println("\n" + "DIPENDENTE CREATO: " + email + pass + "\n" +
-            dipendente);
-}
+    this.registerUserService.createdip("dipendenti@chalet.it", "dipendente1", dipendente);
+    System.out.println("\n" + "DIPENDENTE CREATO: " +
+            "\n" + dipendente +
+            "\n");
+
+
 }
 
-public boolean loginTitolare(){
+
+
+
+
+public boolean loginTitolare() {
     System.out.println("ACCESSO CONSENTITO SOLO CON CREDENZIALI AMMINISTRATORE");
-    System.out.println("Inserisci email: ");
-    Scanner emailIn=new Scanner(System.in);
-    String email=emailIn.next();
-    System.out.println("Inserisci password: ");
-    Scanner passIn=new Scanner(System.in);
-    String pass=passIn.next();
-    if(email.equals("titolare@chalet.it")&&pass.equals("titolare1")){
-        System.out.println("login avveenuto con successo");
-        System.out.print("BENVENUTO AMMINISTRATORE"+"\n");
-        return true;
-    }
-return false;
+    int a = 4;
+    do {
+        System.out.println("Inserisci email: ");
+        Scanner emailIn = new Scanner(System.in);
+        String email = emailIn.next();
+        System.out.println("Inserisci password: ");
+        Scanner passIn = new Scanner(System.in);
+        String pass = passIn.next();
+        if (email.equals("titolare@chalet.it") && pass.equals("titolare1")) {
+            System.out.println("login avveenuto con successo");
+            System.out.print("BENVENUTO AMMINISTRATORE" + "\n");
+            return true;
+        } else {
+            System.out.println("LOGIN ERRATO,RIPROVARE");
+            a = 0;
+            continue;
+        }
+
+    } while (a == 0);
+    return false;
 }
 
 }

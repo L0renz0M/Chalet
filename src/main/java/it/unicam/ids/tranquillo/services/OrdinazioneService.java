@@ -2,7 +2,6 @@ package it.unicam.ids.tranquillo.services;
 
 
 import it.unicam.ids.tranquillo.entities.Ordinazione;
-import it.unicam.ids.tranquillo.entities.Prenotazione;
 import it.unicam.ids.tranquillo.entities.ProdottoBar;
 import it.unicam.ids.tranquillo.repositories.OrdinazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public List<Ordinazione> getListaOrdinazioni(){
 }
 
 public List<Ordinazione> getListaOrdinazioniConsegnare(){
-        return this.ordinazioneRepository.findAllByCompletatoIsTrueAndAndConsegnatoIsFalse();
+        return this.ordinazioneRepository.findAllByCompletatoIsTrueAndConsegnatoIsFalse();
     }
 
     public void selectOrdinazione(int numeroOrd){
