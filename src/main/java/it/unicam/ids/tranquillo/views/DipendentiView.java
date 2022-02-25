@@ -67,6 +67,7 @@ public class DipendentiView {
                     "\n 4- per GESTIRE ORDINAZIONI BAR CLIENTI " +
                     "\n 5- per CONSEGNARE L'ORDINAZIONE AL CLIENTE" +
                     "\n 6- per VISUALIZZARE LE PRENOTAZIONI"+
+                    "\n 7- per APPLICARE SCONTI SU PRODOTTI BAR"+
                     "\n 0- per uscire dal menu");
             Scanner in = new Scanner(System.in);
             b = in.nextInt();
@@ -110,7 +111,7 @@ public class DipendentiView {
                     System.out.println("Elenco prenotazioni effettuate"+"\n" +elencoPrenotazioniClienti);
                     break;
                 case 7:
-
+                    this.prodottoBarService.createPromozioneProdotti();
                     break;
 
             }
